@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Kingshot Tools | Hot×Gie"/>
+  <meta property="og:description" content="Leading Kingdoms Checker & Alliance Batch Redeem"/>
+  <meta property="og:url" content="https://ks-transfer-ranking.github.io/kingdom-ranker/"/>
+  <meta property="og:image" content="/kingdom-ranker/og-image.jpeg"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/kingdom-ranker/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/kingdom-ranker/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/kingdom-ranker/favicon-16x16.png">
+  <link rel="manifest" href="/kingdom-ranker/site.webmanifest">
+  <title>Kingshot 工具 | Hot×Gie</title>
+  <style>
+    :root {
+      --bg-color: #0f1115;
+      --card-bg: #181b22;
+      --input-bg: #0b0d10;
+      --text-color: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border-color: #2a2f3d;
+      --accent-color: #3b82f6;
+      --accent-hover: #2563eb;
+      --success-bg: #1e3a8a;
+      --error-bg: #450a0a;
+      
+      /* Status & Action Colors harmonized with kingdom-ranker dark theme */
+      --btn-retry: #d97706;
+      --btn-retry-hover: #b45309;
+      --btn-disabled: #334155;
+      --status-pending: #94a3b8;
+      --status-pending-bg: rgba(148, 163, 184, 0.12);
+      --status-running: #facc15;
+      --status-running-bg: rgba(250, 204, 21, 0.14);
+      --status-success: #4ade80;
+      --status-success-bg: rgba(74, 222, 128, 0.14);
+      --status-error: #f87171;
+      --status-error-bg: rgba(248, 113, 113, 0.14);
+      --row-active-bg: rgba(250, 204, 21, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      max-width: 900px;
+      margin: 32px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+
+    /* Top Bar with Language Selector */
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .lang-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-wrapper label {
+      margin-bottom: 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    select.lang-select {
+      width: auto;
+      padding: 6px 12px;
+      font-size: 0.88rem;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    select.lang-select:focus {
+      border-color: var(--accent-color);
+    }
+
+    /* Tab Navigation */
+    .tab-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      background-color: var(--card-bg);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .tab-btn {
+      flex: 1;
+      background-color: transparent;
+      color: var(--text-muted);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.98rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: auto;
+    }
+
+    .tab-btn:hover {
+      color: var(--text-color);
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .tab-btn.active {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(59, 130, 246, 0.35);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Common Headings & Cards */
+    h1 {
+      font-size: 1.8rem;
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .page-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+      margin-bottom: 24px;
+    }
+
+    /* Forms & Inputs */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    select, input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="number"]:focus, input[type="text"]:focus {
+      border-color: var(--accent-color);
+    }
+
+    #giftCodeInput {
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+    }
+
+    /* Primary Buttons */
+    button.btn-primary {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      width: 100%;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    button.btn-primary:hover:not(:disabled) {
+      background-color: var(--accent-hover);
+    }
+
+    button.btn-primary:active:not(:disabled) {
+      transform: scale(0.99);
+    }
+
+    button.btn-primary:disabled {
+      background-color: var(--btn-disabled);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      opacity: 0.75;
+    }
+
+    /* Retry Buttons */
+    .btn-retry-all {
+      background-color: var(--btn-retry);
+      color: #ffffff;
+      border: none;
+      padding: 7px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      width: auto;
+      transition: background-color 0.2s;
+    }
+
+    .btn-retry-all:hover:not(:disabled) {
+      background-color: var(--btn-retry-hover);
+    }
+
+    .btn-retry-all:disabled {
+      background-color: var(--btn-disabled);
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .btn-retry-one {
+      background-color: transparent;
+      border: 1px solid var(--btn-retry);
+      color: var(--status-running);
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      width: auto;
+      transition: all 0.2s;
+    }
+
+    .btn-retry-one:hover:not(:disabled) {
+      background-color: var(--btn-retry);
+      color: #ffffff;
+    }
+
+    .btn-retry-one:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.95rem;
+      vertical-align: middle;
+    }
+
+    th {
+      background-color: rgba(255, 255, 255, 0.02);
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: rgba(255, 255, 255, 0.015);
+    }
+
+    /* Ranker Specific Boxes */
+    .target-box {
+      background-color: var(--success-bg);
+      border: 1px solid var(--accent-color);
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .error-box {
+      background-color: var(--error-bg);
+      border: 1px solid #ef4444;
+      border-left: 4px solid #ef4444;
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 20px;
+    }
+
+    /* Gift Code Redeem Specific Elements */
+    .status-box {
+      display: none;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      border-left: 4px solid var(--accent-color);
+    }
+
+    .status-box.info { border-left-color: var(--accent-color); }
+    .status-box.success { border-left-color: var(--status-success); }
+    .status-box.error { border-left-color: var(--status-error); }
+
+    .result-section {
+      display: none;
+    }
+
+    .summary-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .summary-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .summary-stats .stat-total { color: var(--text-color); }
+    .summary-stats .stat-progress { color: var(--accent-color); }
+    .summary-stats .stat-ok { color: var(--status-success); }
+    .summary-stats .stat-fail { color: var(--status-error); }
+
+    .table-wrapper {
+      width: 100%;
+      max-height: 520px;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      scroll-behavior: smooth;
+    }
+
+    .table-wrapper table {
+      margin-top: 0;
+      font-size: 0.9rem;
+    }
+
+    .table-wrapper thead th {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: #13161c;
+      padding: 12px 14px;
+    }
+
+    .table-wrapper tbody td {
+      padding: 10px 14px;
+    }
+
+    tbody tr.row-active td {
+      background-color: var(--row-active-bg);
+    }
+
+    .col-index { width: 50px; color: var(--text-muted); }
+    .col-nickname { font-weight: 500; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .col-fid { font-family: monospace; color: var(--text-muted); width: 115px; }
+    .col-status { width: 125px; }
+    .col-action { width: 95px; text-align: right; }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge.pending { background-color: var(--status-pending-bg); color: var(--status-pending); }
+    .badge.running { background-color: var(--status-running-bg); color: var(--status-running); animation: pulse 1.2s infinite; }
+    .badge.success { background-color: var(--status-success-bg); color: var(--status-success); }
+    .badge.error { background-color: var(--status-error-bg); color: var(--status-error); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (max-width: 600px) {
+      th, td {
+        padding: 10px 10px;
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar: Language Selector -->
+  <div class="top-bar">
+    <div class="lang-wrapper">
+      <label for="langSelect">🌐</label>
+      <select id="langSelect" class="lang-select" onchange="changeLanguage(this.value)">
+        <option value="zh" selected>中文</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <nav class="tab-nav">
+    <button id="tabBtn-ranker" class="tab-btn active" onclick="switchTab('ranker', this)">🏰 王國戰力排行</button>
+    <button id="tabBtn-redeem" class="tab-btn" onclick="switchTab('redeem', this)">🎁 聯盟批量兌換</button>
+  </nav>
+
+  <!-- TAB 1: Kingdom Ranking Checker -->
+  <div id="tab-ranker" class="tab-content active">
+    <h1 data-i18n="rankerTitle">🏰 王國移民戰力查詢</h1>
+    <p class="page-subtitle" data-i18n="rankerSubtitle">查詢各移民組別中的領先王國排名</p>
+
+    <div class="card">
+      <div class="form-group">
+        <label for="range" data-i18n="labelRange">王國組別範圍：</label>
+        <select id="range">
+          <option value="1-417" data-group="1" data-range="1 - 417">第 1 組：1 - 417</option>
+          <option value="418-587" data-group="2" data-range="418 - 587">第 2 組：418 - 587</option>
+          <option value="588-927" data-group="3" data-range="588 - 927">第 3 組：588 - 927</option>
+          <option value="928-1331" data-group="4" data-range="928 - 1331">第 4 組：928 - 1331</option>
+          <option value="1332-1426" data-group="5" data-range="1332 - 1426">第 5 組：1332 - 1426</option>
+          <option value="1427-1689" data-group="6" data-range="1427 - 1689">第 6 組：1427 - 1689</option>
+          <option value="1690-1935" data-group="7" data-range="1690 - 1935">第 7 組：1690 - 1935</option>
+          <option value="1936-2050" data-group="8" data-range="1936 - 2050">第 8 組：1936 - 2050</option>
+          <option value="2051-2105" data-group="9" data-range="2051 - 2105">第 9 組：2051 - 2105</option>
+          <option value="2106-2234" data-group="10" data-range="2106 - 2234">第 10 組：2106 - 2234</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="kid" data-i18n="labelKid">目標王國編號（選填）：</label>
+        <input type="number" id="kid" data-i18n-placeholder="placeholderKid" placeholder="例如：1756">
+      </div>
+      <button class="btn-primary" data-i18n="btnSearchRank" onclick="checkRankings()">查詢並計算排名</button>
+    </div>
+
+    <div id="loading" class="loading" data-i18n="loadingText" style="display:none;">正在讀取並計算數據中...</div>
+
+    <div id="results" style="display:none;">
+      <div id="targetResult"></div>
+
+      <div class="card">
+        <h2 id="rangeTitle">領先王國列表</h2>
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="thRank">排名</th>
+              <th data-i18n="thKid">王國編號 (kid)</th>
+              <th data-i18n="thScore">移民評分（非官方）</th>
+            </tr>
+          </thead>
+          <tbody id="leadingKingdoms"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: Kingshot Alliance Batch Redeem -->
+  <div id="tab-redeem" class="tab-content">
+    <h1 data-i18n="redeemTitle">🎁 聯盟禮包碼批量兌換</h1>
+    <p class="page-subtitle" data-i18n="redeemSubtitle">即時同步聯盟成員名單（KID 1756 &bull; TWN）並顯示兌換進度</p>
+
+    <div class="card">
+      <div class="form-group">
+        <label for="giftCodeInput" data-i18n="labelGiftCode">禮包兌換碼：</label>
+        <input type="text" id="giftCodeInput" data-i18n-placeholder="placeholderGiftCode" placeholder="輸入禮包碼（例如：KS1111）" autocomplete="off" onkeydown="if (event.key === 'Enter') startRedeem()" />
+      </div>
+      <button id="redeemBtn" class="btn-primary" onclick="startRedeem()">一鍵為全員兌換</button>
+    </div>
+
+    <div id="statusBox" class="status-box info"></div>
+
+    <div id="resultSection" class="card result-section">
+      <div class="summary-bar">
+        <div id="summaryStats" class="summary-stats"></div>
+        <button id="retryAllBtn" class="btn-retry-all" style="display: none;" onclick="retryAllFailed()">重試所有失敗項目</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-index">#</th>
+              <th data-i18n="thNickname">玩家暱稱</th>
+              <th data-i18n="thFid">玩家 ID (FID)</th>
+              <th data-i18n="thStatus">狀態</th>
+              <th data-i18n="thMessage">結果訊息</th>
+              <th class="col-action" data-i18n="thAction">操作</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================
+       I18N (CHINESE DEFAULT & ENGLISH)
+       ========================================= */
+    let currentLang = "zh";
+    let lastSearchedRange = "";
+    let lastTargetData = null;
+
+    const i18n = {
+      zh: {
+        pageTitle: "Kingshot 工具箱 | Hot×Gie",
+        tabRanker: "🏰 王國戰力排行",
+        tabRedeem: "🎁 聯盟批量兌換",
+        rankerTitle: "🏰 王國移民戰力查詢",
+        rankerSubtitle: "查詢各移民組別中的領先王國排名",
+        labelRange: "王國組別範圍：",
+        groupOption: (g, r) => `第 ${g} 組：${r}`,
+        labelKid: "目標王國編號（選填）：",
+        placeholderKid: "例如：1756",
+        btnSearchRank: "查詢並計算排名",
+        loadingText: "正在讀取並計算數據中...",
+        rangeTitleDefault: "領先王國列表",
+        rangeTitleWithRange: (r) => `${r} 區間領先王國`,
+        thRank: "排名",
+        thKid: "王國編號 (kid)",
+        thScore: "移民評分（非官方）",
+        targetFoundTitle: (kid) => `🔍 王國 ${kid} 查詢結果`,
+        targetRankLabel: "排名：",
+        targetScoreLabel: "移民評分（非官方）：",
+        targetNotFoundTitle: (kid) => `⚠️ 找不到王國 ${kid}`,
+        targetNotFoundDesc: (total, range) => `已搜尋 ${range} 區間內的 ${total} 個王國，未找到該編號。`,
+        alertServerError: "無法連接至伺服器，請稍後再試。",
+        
+        redeemTitle: "🎁 聯盟禮包碼批量兌換",
+        redeemSubtitle: "即時同步聯盟成員名單（KID 1756 • TWN）並顯示兌換進度",
+        labelGiftCode: "禮包兌換碼：",
+        placeholderGiftCode: "輸入禮包碼（例如：KS1111）",
+        btnRedeemAll: "一鍵為全員兌換",
+        btnRedeemRunning: "正在執行兌換...",
+        alertInvalidCode: "請輸入有效的禮包兌換碼。",
+        statusFetchingMembers: "正在讀取最新聯盟成員名單...",
+        statusRedeeming: (curr, total, name, fid) => `正在兌換 (${curr}/${total})：${name} (${fid})...`,
+        statusAllDone: (code) => `全部完成！已完成禮包碼 ${code} 的批量兌換。`,
+        statusErrorPrefix: (msg) => `錯誤：${msg}`,
+        statusRetryOne: (name, fid) => `正在單獨重試成員：${name} (${fid})...`,
+        statusRetryOneDone: (name, msg) => `${name} 單獨重試完成：${msg}`,
+        statusRetryAll: (curr, total, name, fid) => `正在重試失敗項目 (${curr}/${total})：${name} (${fid})...`,
+        statusRetryAllDone: (code) => `已完成禮包碼 ${code} 所有失敗項目的重試！`,
+        statTotal: (n) => `總人數：${n}`,
+        statProgress: (p, t) => `進度：${p} / ${t}`,
+        statSuccess: (n) => `成功：${n}`,
+        statFail: (n) => `失敗：${n}`,
+        btnRetryAll: (n) => `重試所有失敗 (${n})`,
+        btnRetryOne: "重試",
+        thNickname: "玩家暱稱",
+        thFid: "玩家 ID (FID)",
+        thStatus: "狀態",
+        thMessage: "結果訊息",
+        thAction: "操作",
+        badgePending: "等待中",
+        badgeRunning: "兌換中...",
+        badgeSuccess: "成功",
+        badgeError: "失敗",
+        msgWaiting: "排隊等待中...",
+        msgSending: "正在發送請求...",
+        msgUnknown: "未知回應",
+        msgNetError: (m) => `網絡錯誤：${m}`
+      },
+      en: {
+        pageTitle: "Kingshot Tools | Hot×Gie",
+        tabRanker: "🏰 Kingdom Ranker",
+        tabRedeem: "🎁 Alliance Batch Redeem",
+        rankerTitle: "🏰 Kingdom Ranking Checker",
+        rankerSubtitle: "Finding the leading kingdoms in each transfer group.",
+        labelRange: "Kingdom Range:",
+        groupOption: (g, r) => `Group ${g}: ${r}`,
+        labelKid: "Target Kingdom ID (Optional):",
+        placeholderKid: "e.g. 1756",
+        btnSearchRank: "Search & Rank",
+        loadingText: "Fetching and calculating data...",
+        rangeTitleDefault: "Leading Kingdoms",
+        rangeTitleWithRange: (r) => `Leading Kingdoms in ${r}`,
+        thRank: "Rank",
+        thKid: "Kingdom ID (kid)",
+        thScore: "Transfer Score (Unofficial)",
+        targetFoundTitle: (kid) => `🔍 Search Result for Kingdom ${kid}`,
+        targetRankLabel: "Rank:",
+        targetScoreLabel: "Transfer Score (Unofficial):",
+        targetNotFoundTitle: (kid) => `⚠️ Kingdom ${kid} Not Found`,
+        targetNotFoundDesc: (total, range) => `Searched across ${total} kingdoms in range ${range}.`,
+        alertServerError: "Failed to connect to the server.",
+        
+        redeemTitle: "🎁 Kingshot Alliance Batch Redeem",
+        redeemSubtitle: "Real-time member sync (KID 1756 • TWN) & live redemption progress.",
+        labelGiftCode: "Gift Code:",
+        placeholderGiftCode: "Enter Gift Code (e.g. KS1111)",
+        btnRedeemAll: "Redeem for All",
+        btnRedeemRunning: "Running...",
+        alertInvalidCode: "Please enter a valid gift code.",
+        statusFetchingMembers: "Fetching latest alliance member list...",
+        statusRedeeming: (curr, total, name, fid) => `Redeeming (${curr}/${total}): ${name} (${fid})...`,
+        statusAllDone: (code) => `All done! Batch redemption completed for code: ${code}`,
+        statusErrorPrefix: (msg) => `Error: ${msg}`,
+        statusRetryOne: (name, fid) => `Retrying single member: ${name} (${fid})...`,
+        statusRetryOneDone: (name, msg) => `Single retry finished for ${name}: ${msg}`,
+        statusRetryAll: (curr, total, name, fid) => `Retrying failed (${curr}/${total}): ${name} (${fid})...`,
+        statusRetryAllDone: (code) => `Completed retrying all failed members for code: ${code}`,
+        statTotal: (n) => `Total: ${n}`,
+        statProgress: (p, t) => `Progress: ${p} / ${t}`,
+        statSuccess: (n) => `Success: ${n}`,
+        statFail: (n) => `Failed: ${n}`,
+        btnRetryAll: (n) => `Retry All Failed (${n})`,
+        btnRetryOne: "Retry",
+        thNickname: "Nickname",
+        thFid: "FID",
+        thStatus: "Status",
+        thMessage: "Message",
+        thAction: "Action",
+        badgePending: "Pending",
+        badgeRunning: "Redeeming...",
+        badgeSuccess: "Success",
+        badgeError: "Failed",
+        msgWaiting: "Waiting in queue...",
+        msgSending: "Sending request...",
+        msgUnknown: "Unknown response",
+        msgNetError: (m) => `Network error: ${m}`
+      }
+    };
+
+    function t(key, ...args) {
+      const val = i18n[currentLang][key];
+      return typeof val === "function" ? val(...args) : val;
+    }
+
+    function changeLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-HK" : "en";
+      document.title = t("pageTitle");
+
+      // Tabs
+      document.getElementById("tabBtn-ranker").textContent = t("tabRanker");
+      document.getElementById("tabBtn-redeem").textContent = t("tabRedeem");
+
+      // Static text elements
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = t(key);
+      });
+
+      // Placeholders
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        el.placeholder = t(key);
+      });
+
+      // Range dropdown options
+      document.querySelectorAll("#range option").forEach(opt => {
+        const g = opt.getAttribute("data-group");
+        const r = opt.getAttribute("data-range");
+        opt.textContent = t("groupOption", g, r);
+      });
+
+      // Range title
+      const rangeTitle = document.getElementById("rangeTitle");
+      if (lastSearchedRange) {
+        rangeTitle.textContent = t("rangeTitleWithRange", lastSearchedRange);
+      } else {
+        rangeTitle.textContent = t("rangeTitleDefault");
+      }
+
+      // Re-render target kingdom result box if present
+      if (lastTargetData) {
+        renderTargetBox(lastTargetData.tk, lastTargetData.range);
+      }
+
+      // Redeem button text
+      const redeemBtn = document.getElementById("redeemBtn");
+      redeemBtn.textContent = isBatchRunning ? t("btnRedeemRunning") : t("btnRedeemAll");
+
+      // Refresh Redeem Table Badges, Waiting Messages & Retry buttons if list exists
+      if (memberList.length > 0) {
+        memberList.forEach((m, idx) => {
+          const badge = document.getElementById("badge-" + idx);
+          const msg = document.getElementById("msg-" + idx);
+          const retryBtn = document.querySelector(`#action-${idx} .btn-retry-one`);
+
+          if (badge) {
+            if (m.status === "pending") badge.textContent = t("badgePending");
+            else if (m.status === "running") badge.textContent = t("badgeRunning");
+            else if (m.status === "success") badge.textContent = t("badgeSuccess");
+            else if (m.status === "error") badge.textContent = t("badgeError");
+          }
+
+          if (msg && m.status === "pending") {
+            msg.textContent = t("msgWaiting");
+          }
+
+          if (retryBtn) {
+            retryBtn.textContent = t("btnRetryOne");
+          }
+        });
+        updateSummaryUI();
+      }
+    }
+
+    /* =========================================
+       TAB NAVIGATION LOGIC
+       ========================================= */
+    function switchTab(tabName, btnElement) {
+      document.querySelectorAll('.tab-content').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById('tab-' + tabName).classList.add('active');
+      btnElement.classList.add('active');
+    }
+
+    /* =========================================
+       TAB 1: KINGDOM RANKER LOGIC
+       ========================================= */
+    function renderTargetBox(tk, range) {
+      const targetResult = document.getElementById("targetResult");
+      if (!tk) {
+        targetResult.innerHTML = "";
+        return;
+      }
+
+      if (tk.found) {
+        targetResult.innerHTML = `
+          <div class="card target-box">
+            <h2>${t("targetFoundTitle", tk.kid)}</h2>
+            <p><strong>${t("targetRankLabel")}</strong> #${tk.rank} / ${tk.total}</p>
+            <p style="margin-bottom:0;"><strong>${t("targetScoreLabel")}</strong> ${tk.score}</p>
+          </div>`;
+      } else {
+        targetResult.innerHTML = `
+          <div class="card error-box">
+            <h2>${t("targetNotFoundTitle", tk.kid)}</h2>
+            <p style="margin-bottom:0;">${t("targetNotFoundDesc", tk.total, range)}</p>
+          </div>`;
+      }
+    }
+
+    async function checkRankings() {
+      const rangeInput = document.getElementById("range");
+      const range = rangeInput.value.trim();
+      const kid = document.getElementById("kid").value.trim();
+      const loading = document.getElementById("loading");
+      const results = document.getElementById("results");
+      const leadingKingdoms = document.getElementById("leadingKingdoms");
+      const rangeTitle = document.getElementById("rangeTitle");
+
+      lastSearchedRange = range;
+      rangeTitle.textContent = t("rangeTitleWithRange", range);
+
+      loading.style.display = "block";
+      results.style.display = "none";
+
+      try {
+        const response = await fetch(`https://ks-transfer-ranking.vercel.app/api/rankings?range=${encodeURIComponent(range)}&kid=${encodeURIComponent(kid)}`);
+        const data = await response.json();
+
+        if (data.error) {
+          alert(data.error);
+          return;
+        }
+
+        if (data.targetKingdom) {
+          lastTargetData = { tk: data.targetKingdom, range: range };
+          renderTargetBox(data.targetKingdom, range);
+        } else {
+          lastTargetData = null;
+          renderTargetBox(null, range);
+        }
+
+        leadingKingdoms.innerHTML = data.leading.map(item => `
+          <tr>
+            <td><strong>#${item.rank}</strong></td>
+            <td>${item.kid}</td>
+            <td>${item.score}</td>
+          </tr>
+        `).join("");
+
+        results.style.display = "block";
+      } catch (err) {
+        console.error(err);
+        alert(t("alertServerError"));
+      } finally {
+        loading.style.display = "none";
+      }
+    }
+
+    /* =========================================
+       TAB 2: GIFT CODE REDEEM LOGIC
+       ========================================= */
+    const DELAY_MS = 3200;
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const apiBaseUrl = "https://gift-code-redeem-1756twn.vercel.app";
+
+    let currentCode = "";
+    let currentKid = "1756";
+    let memberList = [];
+    let isBatchRunning = false;
+
+    function updateSummaryUI() {
+      const total = memberList.length;
+      const processed = memberList.filter(m => m.status === "success" || m.status === "error").length;
+      const successCount = memberList.filter(m => m.status === "success").length;
+      const failCount = memberList.filter(m => m.status === "error").length;
+
+      document.getElementById("summaryStats").innerHTML = [
+        '<span class="stat-total">' + t("statTotal", total) + '</span>',
+        '<span class="stat-progress">' + t("statProgress", processed, total) + '</span>',
+        '<span class="stat-ok">' + t("statSuccess", successCount) + '</span>',
+        '<span class="stat-fail">' + t("statFail", failCount) + '</span>'
+      ].join("");
+
+      const retryAllBtn = document.getElementById("retryAllBtn");
+      if (failCount > 0 && !isBatchRunning) {
+        retryAllBtn.style.display = "inline-block";
+        retryAllBtn.innerText = t("btnRetryAll", failCount);
+        retryAllBtn.disabled = false;
+      } else if (isBatchRunning) {
+        retryAllBtn.disabled = true;
+      } else {
+        retryAllBtn.style.display = "none";
+      }
+    }
+
+    function setControlsDisabled(disabled) {
+      isBatchRunning = disabled;
+      document.getElementById("redeemBtn").disabled = disabled;
+      document.getElementById("giftCodeInput").disabled = disabled;
+
+      document.querySelectorAll(".btn-retry-one").forEach(btn => {
+        btn.disabled = disabled;
+      });
+      updateSummaryUI();
+    }
+
+    async function processSinglePlayer(idx, scrollIntoView = false) {
+      const member = memberList[idx];
+      if (!member) return;
+
+      const row = document.getElementById("member-row-" + idx);
+      const badge = document.getElementById("badge-" + idx);
+      const msg = document.getElementById("msg-" + idx);
+      const actionCell = document.getElementById("action-" + idx);
+
+      member.status = "running";
+      if (row) {
+        row.classList.add("row-active");
+        if (scrollIntoView) row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+      if (badge) {
+        badge.className = "badge running";
+        badge.textContent = t("badgeRunning");
+      }
+      if (msg) {
+        msg.style.color = "var(--status-running)";
+        msg.textContent = t("msgSending");
+      }
+      if (actionCell) {
+        actionCell.innerHTML = "";
+      }
+
+      try {
+        const response = await fetch(`${apiBaseUrl}/api/codeRedeem`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "redeemOne",
+            giftCode: currentCode,
+            fid: member.fid,
+            kid: currentKid
+          })
+        });
+
+        const data = await response.json();
+        const isSuccess = data.status === "success";
+
+        member.status = isSuccess ? "success" : "error";
+        member.message = data.message || t("msgUnknown");
+      } catch (err) {
+        member.status = "error";
+        member.message = t("msgNetError", err.message);
+      }
+
+      if (row) row.classList.remove("row-active");
+      if (badge) {
+        badge.className = "badge " + (member.status === "success" ? "success" : "error");
+        badge.textContent = member.status === "success" ? t("badgeSuccess") : t("badgeError");
+      }
+      if (msg) {
+        msg.style.color = "var(--text-color)";
+        msg.textContent = member.message;
+      }
+      if (actionCell && member.status === "error") {
+        const retryBtn = document.createElement("button");
+        retryBtn.className = "btn-retry-one";
+        retryBtn.textContent = t("btnRetryOne");
+        retryBtn.disabled = isBatchRunning;
+        retryBtn.onclick = () => retrySinglePlayer(idx);
+        actionCell.appendChild(retryBtn);
+      }
+
+      updateSummaryUI();
+    }
+
+    async function retrySinglePlayer(idx) {
+      if (isBatchRunning) return;
+      const statusBox = document.getElementById("statusBox");
+      const member = memberList[idx];
+
+      setControlsDisabled(true);
+      statusBox.className = "status-box info";
+      statusBox.innerText = t("statusRetryOne", member.nick_name, member.fid);
+
+      await processSinglePlayer(idx, false);
+
+      statusBox.className = member.status === "success" ? "status-box success" : "status-box error";
+      statusBox.innerText = t("statusRetryOneDone", member.nick_name, member.message);
+      setControlsDisabled(false);
+    }
+
+    async function retryAllFailed() {
+      if (isBatchRunning) return;
+      const failedIndices = memberList
+        .map((m, idx) => (m.status === "error" ? idx : -1))
+        .filter(idx => idx !== -1);
+
+      if (failedIndices.length === 0) return;
+
+      const statusBox = document.getElementById("statusBox");
+      setControlsDisabled(true);
+      statusBox.className = "status-box info";
+
+      for (let i = 0; i < failedIndices.length; i++) {
+        const targetIdx = failedIndices[i];
+        const member = memberList[targetIdx];
+        statusBox.innerText = t("statusRetryAll", i + 1, failedIndices.length, member.nick_name, member.fid);
+
+        await processSinglePlayer(targetIdx, true);
+
+        if (i < failedIndices.length - 1) {
+          await sleep(DELAY_MS);
+        }
+      }
+
+      statusBox.className = "status-box success";
+      statusBox.innerText = t("statusRetryAllDone", currentCode);
+      setControlsDisabled(false);
+    }
+
+    async function startRedeem() {
+      const input = document.getElementById("giftCodeInput");
+      const btn = document.getElementById("redeemBtn");
+      const statusBox = document.getElementById("statusBox");
+      const resultSection = document.getElementById("resultSection");
+      const tbody = document.getElementById("resultsTableBody");
+
+      const giftCode = input.value.trim();
+      if (!giftCode) {
+        alert(t("alertInvalidCode"));
+        input.focus();
+        return;
+      }
+
+      currentCode = giftCode;
+      memberList = [];
+      tbody.innerHTML = "";
+      resultSection.style.display = "none";
+
+      setControlsDisabled(true);
+      btn.innerText = t("btnRedeemRunning");
+      statusBox.className = "status-box info";
+      statusBox.style.display = "block";
+      statusBox.innerText = t("statusFetchingMembers");
+
+      try {
+        const listRes = await fetch(`${apiBaseUrl}/api/codeRedeem`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "getMembers" })
+        });
+
+        const listData = await listRes.json();
+        if (!listRes.ok || !listData.success) {
+          throw new Error(listData.error || "Failed to load member list");
+        }
+
+        currentKid = listData.kid;
+        memberList = listData.members.map(m => ({
+          fid: m.fid,
+          nick_name: m.nick_name,
+          status: "pending",
+          message: t("msgWaiting")
+        }));
+
+        memberList.forEach((m, idx) => {
+          const tr = document.createElement("tr");
+          tr.id = "member-row-" + idx;
+
+          const tdIdx = document.createElement("td");
+          tdIdx.className = "col-index";
+          tdIdx.textContent = idx + 1;
+
+          const tdNick = document.createElement("td");
+          tdNick.className = "col-nickname";
+          tdNick.title = m.nick_name;
+          tdNick.textContent = m.nick_name;
+
+          const tdFid = document.createElement("td");
+          tdFid.className = "col-fid";
+          tdFid.textContent = m.fid;
+
+          const tdStatus = document.createElement("td");
+          tdStatus.className = "col-status";
+          tdStatus.innerHTML = '<span id="badge-' + idx + '" class="badge pending">' + t("badgePending") + '</span>';
+
+          const tdMsg = document.createElement("td");
+          tdMsg.id = "msg-" + idx;
+          tdMsg.style.color = "var(--text-muted)";
+          tdMsg.textContent = m.message;
+
+          const tdAction = document.createElement("td");
+          tdAction.id = "action-" + idx;
+          tdAction.className = "col-action";
+
+          tr.append(tdIdx, tdNick, tdFid, tdStatus, tdMsg, tdAction);
+          tbody.appendChild(tr);
+        });
+
+        updateSummaryUI();
+        resultSection.style.display = "block";
+
+        for (let i = 0; i < memberList.length; i++) {
+          const member = memberList[i];
+          statusBox.innerText = t("statusRedeeming", i + 1, memberList.length, member.nick_name, member.fid);
+
+          await processSinglePlayer(i, true);
+
+          if (i < memberList.length - 1) {
+            await sleep(DELAY_MS);
+          }
+        }
+
+        statusBox.className = "status-box success";
+        statusBox.innerText = t("statusAllDone", currentCode);
+      } catch (err) {
+        statusBox.className = "status-box error";
+        statusBox.innerText = t("statusErrorPrefix", err.message);
+      } finally {
+        btn.innerText = t("btnRedeemAll");
+        setControlsDisabled(false);
+      }
+    }
+  </script>
+</body>
+</html>
