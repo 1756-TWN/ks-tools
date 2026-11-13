@@ -25,7 +25,6 @@
       --success-bg: #1e3a8a;
       --error-bg: #450a0a;
       
-      /* Status & Action Colors harmonized with kingdom-ranker dark theme */
       --btn-retry: #d97706;
       --btn-retry-hover: #b45309;
       --btn-disabled: #334155;
@@ -48,7 +47,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      max-width: 900px;
+      max-width: 960px;
       margin: 32px auto;
       padding: 0 20px;
       line-height: 1.5;
@@ -430,7 +429,378 @@
       50% { opacity: 0.5; }
     }
 
-    @media (max-width: 600px) {
+    /* =========================================
+       TAB 3: BEAR RATIO CALCULATOR STYLES
+       ========================================= */
+    .bear-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .bear-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .bear-pill strong {
+      color: var(--text-color);
+      font-weight: 700;
+    }
+
+    .bear-troop-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .bear-troop-box {
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .bear-troop-box.inf { border-top: 3px solid #f43f5e; }
+    .bear-troop-box.cav { border-top: 3px solid #0ea5e9; }
+    .bear-troop-box.arc { border-top: 3px solid #10b981; }
+
+    .bear-troop-title {
+      font-weight: 700;
+      font-size: 0.98rem;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .bear-mini-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .bear-joiner-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    /* =========================================
+       CUSTOM HERO DROPDOWN WITH PORTRAITS
+       ========================================= */
+    .hero-select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero-select-trigger {
+      width: 100%;
+      min-height: 44px;
+      padding: 6px 10px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+    }
+
+    .hero-select-trigger:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .hero-select-wrapper.open .hero-select-trigger {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.22);
+    }
+
+    .hero-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background-color: #1e2330;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+
+    .hero-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-trigger-name {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-chevron {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .hero-select-wrapper.open .hero-chevron {
+      transform: rotate(180deg);
+      color: var(--accent-color);
+    }
+
+    .hero-dropdown-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: calc(100% + 6px);
+      z-index: 999;
+      background-color: #141820;
+      border: 1px solid #333a4b;
+      border-radius: 10px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+      padding: 6px;
+      display: none;
+      min-width: 210px;
+    }
+
+    .hero-select-wrapper.open .hero-dropdown-menu {
+      display: block;
+      animation: dropdownFade 0.14s ease-out;
+    }
+
+    @keyframes dropdownFade {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-search-box {
+      position: relative;
+      margin-bottom: 6px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 6px;
+    }
+
+    .hero-search-box svg {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .hero-search-input {
+      width: 100%;
+      padding: 6px 10px 6px 30px !important;
+      font-size: 0.88rem !important;
+      background-color: var(--input-bg) !important;
+      border: 1px solid var(--border-color) !important;
+      border-radius: 6px !important;
+      color: var(--text-color) !important;
+    }
+
+    .hero-options-list {
+      max-height: 240px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .hero-options-list::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .hero-options-list::-webkit-scrollbar-thumb {
+      background-color: #2f3646;
+      border-radius: 999px;
+    }
+
+    .hero-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      transition: background-color 0.15s;
+    }
+
+    .hero-option-item:hover {
+      background-color: rgba(59, 130, 246, 0.16);
+    }
+
+    .hero-option-item.selected {
+      background-color: rgba(16, 185, 129, 0.16);
+      color: #6ee7b7;
+      font-weight: 600;
+    }
+
+    .hero-option-item .hero-avatar {
+      width: 32px;
+      height: 32px;
+    }
+
+    .hero-option-label {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .hero-note-star {
+      color: #fbbf24;
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    .hero-check-icon {
+      width: 15px;
+      height: 15px;
+      color: #10b981;
+      flex-shrink: 0;
+    }
+
+    .hero-empty-msg {
+      padding: 12px;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* Recommendation & Report Cards */
+    .rec-card {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(59, 130, 246, 0.1));
+      border: 1px solid #10b981;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .rec-ratio-display {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      margin: 6px 0 14px;
+    }
+
+    .rec-ratio-bar {
+      display: flex;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background-color: var(--input-bg);
+    }
+
+    .rec-counts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .rec-count-item {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .rec-count-item span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .rec-count-item strong {
+      font-size: 1.1rem;
+      color: var(--text-color);
+    }
+
+    .bear-bar-track {
+      width: 100%;
+      height: 12px;
+      background-color: var(--input-bg);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 6px 0 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .bear-bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.35s ease;
+    }
+
+    .bear-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn-secondary {
+      background-color: var(--input-bg);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-color);
+      background-color: rgba(59, 130, 246, 0.1);
+    }
+
+    .bear-note {
+      font-size: 0.82rem;
+      color: #fbbf24;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px) {
+      .bear-troop-grid, .bear-joiner-grid, .rec-counts-grid {
+        grid-template-columns: 1fr;
+      }
       th, td {
         padding: 10px 10px;
         font-size: 0.85rem;
@@ -455,6 +825,7 @@
   <nav class="tab-nav">
     <button id="tabBtn-ranker" class="tab-btn active" onclick="switchTab('ranker', this)">🏰 王國戰力排行</button>
     <button id="tabBtn-redeem" class="tab-btn" onclick="switchTab('redeem', this)">🎁 聯盟批量兌換</button>
+    <button id="tabBtn-bear" class="tab-btn" onclick="switchTab('bear', this)">🐻 熊狩比例計算</button>
   </nav>
 
   <!-- TAB 1: Kingdom Ranking Checker -->
@@ -545,6 +916,200 @@
     </div>
   </div>
 
+  <!-- TAB 3: Bear Ratio Calculator (KingshotGuide Exact Engine + Hero Portraits) -->
+  <div id="tab-bear" class="tab-content">
+    <h1 data-i18n="bearTitle">🐻 狩獵巨熊配兵計算機</h1>
+    <p class="page-subtitle" data-i18n="bearSubtitle">精準傷害模型與英雄技能乘區演算法 (多分桶技能引擎與蒙地卡羅模擬) — 仍在測試中，暫不建議使用</p>
+
+    <div class="card">
+      <div class="bear-header-row">
+        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+          <div class="bear-pill"><span data-i18n="bearTotalLabel">總出兵量：</span><strong id="bearTotalTroops">150,000</strong></div>
+          <div class="bear-pill">
+            <span data-i18n="bearValoraLabel">維拉：</span>
+            <select id="bearValora" onchange="updateBearQuick()" style="width:auto; padding:2px 6px; font-size:0.82rem;">
+              <option value="0">0%</option>
+              <option value="2">2%</option>
+              <option value="4">4%</option>
+              <option value="6">6%</option>
+              <option value="9">9%</option>
+              <option value="12">12%</option>
+              <option value="15">15%</option>
+              <option value="18">18%</option>
+              <option value="21">21%</option>
+              <option value="24">24%</option>
+              <option value="27">27%</option>
+							<option value="30">30%</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-secondary" onclick="resetBearCalc()" data-i18n="bearResetBtn">重設預設值</button>
+      </div>
+
+      <div class="bear-troop-grid">
+        <!-- Infantry -->
+        <div class="bear-troop-box inf">
+          <div class="bear-troop-title"><span data-i18n="bearInfTitle">🛡️ 步兵 Infantry</span></div>
+          <div class="form-group">
+            <label data-i18n="bearTroopCount">目前兵力</label>
+            <input type="number" id="infCount" value="50000" min="0" max="2000000" oninput="updateBearQuick()">
+          </div>
+          <div class="bear-mini-row form-group">
+            <div>
+              <label data-i18n="bearAtk">攻擊 %</label>
+              <input type="number" id="infAtk" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+            <div>
+              <label data-i18n="bearLeth">殺傷 %</label>
+              <input type="number" id="infLeth" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="bearTier">兵種階級</label>
+            <select id="infTier" onchange="updateBearQuick()"></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearLeadHero">車頭英雄</label>
+            <div id="infHeroContainer"></div>
+          </div>
+        </div>
+
+        <!-- Cavalry -->
+        <div class="bear-troop-box cav">
+          <div class="bear-troop-title"><span data-i18n="bearCavTitle">🐎 騎兵 Cavalry</span></div>
+          <div class="form-group">
+            <label data-i18n="bearTroopCount">目前兵力</label>
+            <input type="number" id="cavCount" value="50000" min="0" max="2000000" oninput="updateBearQuick()">
+          </div>
+          <div class="bear-mini-row form-group">
+            <div>
+              <label data-i18n="bearAtk">攻擊 %</label>
+              <input type="number" id="cavAtk" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+            <div>
+              <label data-i18n="bearLeth">殺傷 %</label>
+              <input type="number" id="cavLeth" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="bearTier">兵種階級</label>
+            <select id="cavTier" onchange="updateBearQuick()"></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearLeadHero">車頭英雄</label>
+            <div id="cavHeroContainer"></div>
+          </div>
+        </div>
+
+        <!-- Archers -->
+        <div class="bear-troop-box arc">
+          <div class="bear-troop-title"><span data-i18n="bearArcTitle">🏹 弓兵 Archers</span></div>
+          <div class="form-group">
+            <label data-i18n="bearTroopCount">目前兵力</label>
+            <input type="number" id="arcCount" value="50000" min="0" max="2000000" oninput="updateBearQuick()">
+          </div>
+          <div class="bear-mini-row form-group">
+            <div>
+              <label data-i18n="bearAtk">攻擊 %</label>
+              <input type="number" id="arcAtk" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+            <div>
+              <label data-i18n="bearLeth">殺傷 %</label>
+              <input type="number" id="arcLeth" value="400" step="25" oninput="updateBearQuick()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="bearTier">兵種階級</label>
+            <select id="arcTier" onchange="updateBearQuick()"></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearLeadHero">車頭英雄</label>
+            <div id="arcHeroContainer"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:8px;">
+        <label data-i18n="bearJoinersTitle">🤝 集結加成英雄（最多 4 位車頭第一遠征技能）</label>
+      </div>
+      <div class="bear-joiner-grid">
+        <div>
+          <label style="font-size:0.8rem;">Joiner 1</label>
+          <div id="joiner1Container"></div>
+        </div>
+        <div>
+          <label style="font-size:0.8rem;">Joiner 2</label>
+          <div id="joiner2Container"></div>
+        </div>
+        <div>
+          <label style="font-size:0.8rem;">Joiner 3</label>
+          <div id="joiner3Container"></div>
+        </div>
+        <div>
+          <label style="font-size:0.8rem;">Joiner 4</label>
+          <div id="joiner4Container"></div>
+        </div>
+      </div>
+      <div id="bearHeroNote" class="bear-note"></div>
+    </div>
+
+    <!-- Quick Recommendation Card -->
+    <div class="rec-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <span style="font-size:0.88rem; font-weight:700; color:#10b981; text-transform:uppercase;" data-i18n="bearQuickTitle">⚡ 即時推薦配兵比例 (步 / 騎 / 弓)</span>
+        <span id="bearVsBaseBadge" class="badge success">+0.0% vs 10/10/80</span>
+      </div>
+      <div id="bearQuickRatio" class="rec-ratio-display">2 / 21 / 77</div>
+      <div class="rec-ratio-bar">
+        <div id="barRatioInf" style="width:2%; background:#f43f5e;"></div>
+        <div id="barRatioCav" style="width:21%; background:#0ea5e9;"></div>
+        <div id="barRatioArc" style="width:77%; background:#10b981;"></div>
+      </div>
+      <div class="rec-counts-grid">
+        <div class="rec-count-item">
+          <span data-i18n="bearInfShort">步兵 Infantry</span>
+          <strong id="recInfCount">3,000</strong>
+        </div>
+        <div class="rec-count-item">
+          <span data-i18n="bearCavShort">騎兵 Cavalry</span>
+          <strong id="recCavCount">31,500</strong>
+        </div>
+        <div class="rec-count-item">
+          <span data-i18n="bearArcShort">弓兵 Archers</span>
+          <strong id="recArcCount">115,500</strong>
+        </div>
+      </div>
+      <div class="bear-action-row">
+        <button class="btn-primary" style="flex:2;" onclick="generateBearReport()" data-i18n="bearGenReportBtn">📊 生成詳細傷害模擬報告</button>
+        <button class="btn-secondary" style="flex:1;" onclick="applyRecommendedToMarch()" data-i18n="bearApplyBtn">套用至目前兵力</button>
+      </div>
+    </div>
+
+    <!-- Simulation Report Card -->
+    <div id="bearReportCard" class="card" style="display:none;">
+      <h2 data-i18n="bearReportTitle">📈 傷害模擬與配兵對比報告 (1,000 次模擬)</h2>
+      <div id="bearBarsContainer"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="bearThMarch">編隊方案</th>
+            <th data-i18n="bearThTroops">兵力分配 (步/騎/弓)</th>
+            <th data-i18n="bearThAvg">平均傷害</th>
+            <th data-i18n="bearThRange">中間 80% 波動 (P10–P90)</th>
+          </tr>
+        </thead>
+        <tbody id="bearCompareTbody"></tbody>
+      </table>
+
+      <div class="bear-action-row">
+        <button class="btn-secondary" onclick="exportBearPNG()" data-i18n="bearSavePng">🖼️ 儲存報告圖片 (PNG)</button>
+        <button class="btn-secondary" onclick="exportBearJSON()" data-i18n="bearSaveJson">📄 下載 JSON</button>
+        <button class="btn-secondary" onclick="exportBearCSV()" data-i18n="bearSaveCsv">📊 下載 CSV 模擬數據</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* =========================================
        I18N (CHINESE DEFAULT & ENGLISH)
@@ -558,6 +1123,7 @@
         pageTitle: "Kingshot 工具箱 | Hot×Gie",
         tabRanker: "🏰 王國戰力排行",
         tabRedeem: "🎁 聯盟批量兌換",
+        tabBear: "🐻 熊狩比例計算",
         rankerTitle: "🏰 王國移民戰力查詢",
         rankerSubtitle: "查詢各移民組別中的領先王國排名",
         labelRange: "王國組別範圍：",
@@ -611,12 +1177,82 @@
         msgWaiting: "排隊等待中...",
         msgSending: "正在發送請求...",
         msgUnknown: "未知回應",
-        msgNetError: (m) => `網絡錯誤：${m}`
+        msgNetError: (m) => `網絡錯誤：${m}`,
+
+        bearTitle: "🐻 巨熊狩獵配兵計算機",
+        bearSubtitle: "精準傷害模型與英雄技能乘區演算法 (多分桶技能引擎與蒙地卡羅模擬) — 仍在測試中，暫不建議使用",
+        bearTotalLabel: "總出兵量：",
+        bearResetBtn: "重設預設值",
+        bearInfTitle: "🛡️ 步兵 Infantry",
+        bearCavTitle: "🐎 騎兵 Cavalry",
+        bearArcTitle: "🏹 弓兵 Archers",
+        bearTroopCount: "目前兵力",
+        bearAtk: "攻擊 %",
+        bearLeth: "殺傷 %",
+        bearTier: "兵種階級",
+        bearLeadHero: "隊長主將",
+        bearJoinersTitle: "🤝 集結加成英雄（最多 4 位車頭第一遠征技能）",
+        bearQuickTitle: "⚡ 即時推薦配兵比例 (步 / 騎 / 弓)",
+        bearInfShort: "步兵 Infantry",
+        bearCavShort: "騎兵 Cavalry",
+        bearArcShort: "弓兵 Archers",
+        bearGenReportBtn: "📊 生成詳細傷害模擬報告",
+        bearApplyBtn: "套用至目前兵力",
+        bearReportTitle: "📈 傷害模擬與配兵對比報告 (1,000 次模擬)",
+        bearThMarch: "編隊方案",
+        bearThTroops: "兵力分配 (步/騎/弓)",
+        bearThAvg: "平均傷害",
+        bearThRange: "中間 80% 波動 (P10–P90)",
+        bearSavePng: "🖼️ 儲存報告圖片 (PNG)",
+        bearSaveJson: "📄 下載 JSON",
+        bearSaveCsv: "📊 下載 CSV 模擬數據",
+        bearMarchRec: "最佳推薦配兵",
+        bearMarchYours: "你目前的配兵",
+        bearMarchBase: "傳統 10/10/80",
+        heroSearchPlaceholder: "搜尋英雄...",
+        heroNotFound: "找不到英雄",
+				bearValoraLabel: "維拉：",
+
+				alcar: "阿爾卡",
+				amadeus: "阿瑪迪斯",
+				amane: "雨音",
+				ava: "艾娃",
+				charles: "查爾斯",
+				chenko: "琴科",
+				diana: "狄安娜",
+				diego: "迭戈",
+				eric: "艾瑞克",
+				fahd: "法赫德",
+				gordon: "戈登",
+				hilde: "希爾德",
+				helga: "赫爾加",
+				howard: "霍華德",
+				jabel: "潔貝爾",
+				jaeger: "耶格爾",
+				liz: "莉茲",
+				longfei: "龍飛",
+				luna: "露娜",
+				margot: "瑪爾戈",
+				marlin: "馬林",
+				petra: "佩特拉",
+				quinn: "奎恩",
+				rosa: "羅莎",
+				saul: "薩洛",
+				sophia: "索菲亞",
+				thrud: "瑟魯德",
+				triton: "崔頓",
+				vivian: "薇薇安",
+				"wee-woo": "威與伍",
+				yang: "楊",
+				yeonwoo: "妍羽",
+				zoe: "佐伊",
+				none: "None",
       },
       en: {
         pageTitle: "Kingshot Tools | Hot×Gie",
         tabRanker: "🏰 Kingdom Ranker",
         tabRedeem: "🎁 Alliance Batch Redeem",
+        tabBear: "🐻 Bear Calculator",
         rankerTitle: "🏰 Kingdom Ranking Checker",
         rankerSubtitle: "Finding the leading kingdoms in each transfer group.",
         labelRange: "Kingdom Range:",
@@ -670,7 +1306,76 @@
         msgWaiting: "Waiting in queue...",
         msgSending: "Sending request...",
         msgUnknown: "Unknown response",
-        msgNetError: (m) => `Network error: ${m}`
+        msgNetError: (m) => `Network error: ${m}`,
+
+        bearTitle: "🐻 Kingshot Bear Ratio Calculator",
+        bearSubtitle: "Multi-bucket skill engine & Monte Carlo simulation — testing in progress; not yet recommended for use.",
+        bearTotalLabel: "Total Troops:",
+        bearResetBtn: "Reset Defaults",
+        bearInfTitle: "🛡️ Infantry",
+        bearCavTitle: "🐎 Cavalry",
+        bearArcTitle: "🏹 Archers",
+        bearTroopCount: "Current Troops",
+        bearAtk: "Attack %",
+        bearLeth: "Lethality %",
+        bearTier: "Troop Tier",
+        bearLeadHero: "Lead Hero",
+        bearJoinersTitle: "🤝 Rally Joiner Heroes (Up to 4 leader 1st expedition skills)",
+        bearQuickTitle: "⚡ Instant Recommended Ratio (Inf / Cav / Arc)",
+        bearInfShort: "Infantry",
+        bearCavShort: "Cavalry",
+        bearArcShort: "Archers",
+        bearGenReportBtn: "📊 Generate Detailed Damage Simulation Report",
+        bearApplyBtn: "Apply to Current Troops",
+        bearReportTitle: "📈 Damage Simulation & Comparison Report (1,000 Runs)",
+        bearThMarch: "March Plan",
+        bearThTroops: "Troop Allocation (Inf/Cav/Arc)",
+        bearThAvg: "Average Damage",
+        bearThRange: "Middle 80% Range (P10–P90)",
+        bearSavePng: "🖼️ Save Report Image (PNG)",
+        bearSaveJson: "📄 Download JSON",
+        bearSaveCsv: "📊 Download CSV Simulation Data",
+        bearMarchRec: "Recommended Mix",
+        bearMarchYours: "Your Current Mix",
+        bearMarchBase: "Standard 10/10/80",
+        heroSearchPlaceholder: "Search heroes...",
+        heroNotFound: "No heroes found.",
+				bearValoraLabel: "Valora：",
+				
+				alcar: "Alcar",
+				amadeus: "Amadeus",
+				amane: "Amane",
+				ava: "Ava",
+				charles: "Charles",
+				chenko: "Chenko",
+				diana: "Diana",
+				diego: "Diego",
+				eric: "Eric",
+				fahd: "Fahd",
+				gordon: "Gordon",
+				hilde: "Hilde",
+				helga: "Helga",
+				howard: "Howard",
+				jabel: "Jabel",
+				jaeger: "Jaeger",
+				liz: "Liz",
+				longfei: "Long Fei",
+				luna: "Luna",
+				margot: "Margot",
+				marlin: "Marlin",
+				petra: "Petra",
+				quinn: "Quinn",
+				rosa: "Rosa",
+				saul: "Saul",
+				sophia: "Sophia",
+				thrud: "Thrud",
+				triton: "Triton",
+				vivian: "Vivian",
+				"wee-woo": "Wee & Woo",
+				yang: "Yang",
+				yeonwoo: "Yeonwoo",
+				zoe: "Zoe",
+				none: "None",
       }
     };
 
@@ -684,30 +1389,26 @@
       document.documentElement.lang = lang === "zh" ? "zh-HK" : "en";
       document.title = t("pageTitle");
 
-      // Tabs
       document.getElementById("tabBtn-ranker").textContent = t("tabRanker");
       document.getElementById("tabBtn-redeem").textContent = t("tabRedeem");
+      document.getElementById("tabBtn-bear").textContent = t("tabBear");
 
-      // Static text elements
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
         el.textContent = t(key);
       });
 
-      // Placeholders
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
         el.placeholder = t(key);
       });
 
-      // Range dropdown options
       document.querySelectorAll("#range option").forEach(opt => {
         const g = opt.getAttribute("data-group");
         const r = opt.getAttribute("data-range");
         opt.textContent = t("groupOption", g, r);
       });
 
-      // Range title
       const rangeTitle = document.getElementById("rangeTitle");
       if (lastSearchedRange) {
         rangeTitle.textContent = t("rangeTitleWithRange", lastSearchedRange);
@@ -715,16 +1416,13 @@
         rangeTitle.textContent = t("rangeTitleDefault");
       }
 
-      // Re-render target kingdom result box if present
       if (lastTargetData) {
         renderTargetBox(lastTargetData.tk, lastTargetData.range);
       }
 
-      // Redeem button text
       const redeemBtn = document.getElementById("redeemBtn");
       redeemBtn.textContent = isBatchRunning ? t("btnRedeemRunning") : t("btnRedeemAll");
 
-      // Refresh Redeem Table Badges, Waiting Messages & Retry buttons if list exists
       if (memberList.length > 0) {
         memberList.forEach((m, idx) => {
           const badge = document.getElementById("badge-" + idx);
@@ -747,6 +1445,18 @@
           }
         });
         updateSummaryUI();
+      }
+
+			document.querySelector("#infHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#infHero").value);
+			document.querySelector("#cavHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#cavHero").value);
+			document.querySelector("#arcHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#arcHero").value);
+			document.querySelector("#joiner1-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner1").value);
+			document.querySelector("#joiner2-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner2").value);
+			document.querySelector("#joiner3-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner3").value);
+			document.querySelector("#joiner4-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner4").value);
+
+      if (lastBearReport) {
+        renderBearReport(lastBearReport);
       }
     }
 
@@ -1105,6 +1815,563 @@
         setControlsDisabled(false);
       }
     }
+
+    /* =========================================
+       TAB 3: EXACT KINGSHOTGUIDE BEAR CALCULATOR ENGINE + CUSTOM PORTRAIT DROPDOWNS
+       ========================================= */
+    const UNITS = ["infantry", "cavalry", "archers"];
+    const TIER_OPTIONS = [
+      { value: "6-0", label: "T6" },
+      { value: "9-0", label: "T9" },
+      { value: "10-0", label: "T10" },
+      ...Array.from({ length: 8 }, (_, i) => ({ value: `10-${i + 1}`, label: `T10-TG${i + 1}` })),
+      ...Array.from({ length: 4 }, (_, i) => ({ value: `11-${i + 5}`, label: `T11-TG${i + 5}` }))
+    ];
+
+    const BASE_ATK_TABLE = {
+      infantry: {
+        "6-0": 243, "9-0": 400, "10-0": 472,
+        "10-1": 491, "10-2": 515, "10-3": 541, "10-4": 568, "10-5": 597, "10-6": 626, "10-7": 657, "10-8": 690,
+        "11-5": 700, "11-6": 735, "11-7": 771, "11-8": 809
+      },
+      cavalry: {
+        "6-0": 730, "9-0": 1200, "10-0": 1416,
+        "10-1": 1473, "10-2": 1546, "10-3": 1624, "10-4": 1705, "10-5": 1790, "10-6": 1879, "10-7": 1973, "10-8": 2072,
+        "11-5": 2108, "11-6": 2213, "11-7": 2323, "11-8": 2439
+      },
+      archers: {
+        "6-0": 974, "9-0": 1600, "10-0": 1888,
+        "10-1": 1964, "10-2": 2062, "10-3": 2165, "10-4": 2273, "10-5": 2387, "10-6": 2506, "10-7": 2631, "10-8": 2763,
+        "11-5": 2812, "11-6": 2952, "11-7": 3099, "11-8": 3255
+      }
+    };
+
+    const LEAD_LISTS = {
+      infantry: ["None", "Diego", "Charles", "Amadeus", "Triton", "Long Fei", "Alcar", "Howard", "Eric", "Zoe", "Helga"],
+      cavalry: ["None", "Liz", "Ava", "Petra", "Thrud", "Sophia", "Jabel", "Chenko", "Gordon", "Fahd", "Margot"],
+      archers: ["None", "Luna", "Wee & Woo", "Yang", "Vivian", "Rosa", "Amane", "Yeonwoo", "Quinn", "Saul", "Marlin"]
+    };
+
+    const JOINER_LIST = ["None", "Chenko", "Amane", "Hilde", "Yeonwoo", "Petra", "Margot", "Ava", "Wee & Woo"];
+
+    const HERO_NOTES = {
+      Petra: "Petra: Evil Eye can boost damage from all three troop types. Multiple Petra joiners do not add separate curse bonuses.",
+      Yang: "Yang: Ambush is excluded because its damage bonus is unknown. This estimate may understate his contribution.",
+      Triton: "Triton: his skill damage bonus is not included, so selecting him adds no damage in this calculator.",
+      Sophia: "Sophia: Terror skill timing is approximate, which can affect her estimated damage.",
+      Vivian: "Vivian: the timing of her target debuffs is approximate, which can affect her estimated damage.",
+      Alcar: "Alcar: the timing of his target debuffs is approximate, which can affect his estimated damage."
+    };
+
+    const sk = (slot, name, group, mag, opts = {}) => ({ slot, name, group, mag, ...opts });
+
+    const HERO_SKILLS_DB = {
+      Amadeus: [sk(1, "Battle Ready", "lethality", 0.25), sk(2, "Way of the Blade", "attack", 0.25), sk(3, "Unrighteous Strike", "damage", 0.50, { chance: 0.40 })],
+      Rosa: [sk(1, "Chaos Gambit", "damage", 0.50, { chance: 0.40 }), sk(3, "Golden Rhythm", "attack", 0.30, { units: ["archers"] })],
+      Petra: [sk(1, "Evil Eye", "taken", 0.50, { chance: 0.50 }), sk(2, "The Favor", "damage", 0.50, { chance: 0.50 })],
+      Alcar: [sk(2, "Praetorian Will", "damage", 1.00, { units: ["infantry"] }), sk(2, "Praetorian Will (other)", "damage", 0.10, { units: ["cavalry", "archers"] }), sk(3, "Carpe Diem", "extra", 0.60, { units: ["infantry"] }), sk(3, "Carpe Diem (target)", "taken", 0.25)],
+      Margot: [sk(1, "Warbringer", "attack", 0.25), sk(3, "Sleight Hand", "extra", 2.00, { chance: 0.25, units: ["cavalry"] })],
+      Chenko: [sk(1, "Stand of Arms", "lethality", 0.25)],
+      Amane: [sk(1, "Tri-Phalanx", "attack", 0.25)],
+      Yeonwoo: [sk(1, "On Guard", "lethality", 0.25)],
+      Hilde: [sk(1, "Noble Path", "attack", 0.15), sk(2, "Elixir of Strength", "extra", 2.00, { chance: 0.25 })],
+      Zoe: [sk(1, "Sundering", "extra", 0.40, { chance: 0.20, duration: 3 }), sk(2, "Charisma", "attack", 0.25), sk(3, "Infinite", "taken", 0.50, { chance: 0.50 })],
+      Marlin: [sk(1, "Wild Card", "damage", 0.50, { chance: 0.40 }), sk(3, "Dynamo", "damage", 0.50, { chance: 0.50 })],
+      Jabel: [sk(2, "Hero's Domain", "extra", 0.50, { chance: 0.50 }), sk(3, "Youthful Rage", "damage", 0.25)],
+      Quinn: [sk(2, "Precision Shot", "extra", 0.50, { chance: 0.50 })],
+      Gordon: [sk(2, "Trash Talk", "attack", 0.25)],
+      Saul: [sk(3, "Positional", "lethality", 0.25)],
+      Helga: [sk(2, "Echoes of Valhalla", "attack", 0.25), sk(3, "Nature's Balance", "lethality", 0.25)],
+      Jaeger: [sk(1, "The Tempest", "damage", 0.40, { chance: 0.20, duration: 3 })],
+      Thrud: [sk(1, "Battle Fever", "damage", 0.15, { units: ["infantry", "archers"] }), sk(2, "Brutal Charge", "extra", 1.00, { units: ["cavalry"], chance: 0.20 }), sk(3, "Ancestral Spirits", "damage", 0.25, { every: 4, duration: 2 })],
+      Vivian: [sk(1, "Patient Commander", "taken", 0.25), sk(2, "Expose Weakness", "extra", 1.00, { every: 4 }), sk(2, "Expose Weakness (target)", "taken", 0.15, { every: 4 }), sk(3, "Coin Traps", "extra", 0.60, { units: ["archers"], every: 4, offset: 1 })],
+      "Long Fei": [sk(3, "War Wisdom", "extra", 2.00, { chance: 0.25 })],
+      Yang: [sk(1, "Avalanche", "extra", 1.00, { every: 4 }), sk(2, "Ice Zone", "extra", 1.00, { chance: 0.40, units: ["archers"] })],
+      Sophia: [sk(2, "Terror – Deathblow", "taken", 2.00, { every: 2, offset: 1, units: ["cavalry"] }), sk(3, "Terror – Annihilation", "damage", 0.75, { every: 2, offset: 1 })],
+      Ava: [sk(1, "Dissolution", "defenseDown", 0.25), sk(2, "Chiaroscuro", "taken", 0.50, { every: 4, duration: 2 }), sk(3, "Light and Cold", "lethality", 0.25)],
+      "Wee & Woo": [sk(1, "Artillerymen", "attack", 0.15), sk(1, "Artillerymen (leth)", "lethality", 0.10), sk(2, "Chain Shelling", "damage", 0.25), sk(3, "Boom Boom", "extra", 0.50, { chance: 0.50 })],
+      Diego: [sk(2, "Piercing Aura", "extra", 0.50, { chance: 0.50 }), sk(3, "Cold Frost", "lethality", 0.25)],
+      Liz: [sk(1, "Alloyed Agent", "lethality", 0.50, { chance: 0.50 }), sk(3, "Horsemaster", "extra", 1.50, { chance: 0.50, units: ["cavalry"] })],
+      Luna: [sk(1, "Driving Light", "attack", 0.25), sk(3, "Arrowflash", "extra", 0.50, { units: ["archers"] })],
+      Howard: [], Eric: [], Charles: [], Fahd: [], Diana: [], Olive: [], Edwin: [], Seth: [], Forrest: [], Triton: [], None: []
+    };
+
+    const REF_NORM = 11800 * Math.sqrt(15000) + 35400 * Math.sqrt(15000) + 47200 * 1.1 * 1.1 * Math.sqrt(120000);
+    const FORMULA_SCALE = 0.0012 * Math.sqrt(5000);
+
+    let currentBestMix = { allocation: { infantry: 3000, cavalry: 31500, archers: 115500 }, ratios: { infantry: 2, cavalry: 21, archers: 77 } };
+    let lastBearReport = null;
+
+    /* =========================================
+       CUSTOM HERO DROPDOWN BUILDER (./images/heroes/${heroName}.webp)
+       ========================================= */
+    const FALLBACK_USER_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>`;
+    const CHEVRON_SVG = `<svg class="hero-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+    const CHECK_SVG = `<svg class="hero-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+    const SEARCH_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`;
+
+    function getHeroImgSrc(heroName) {
+      if (!heroName || heroName === "None") return null;
+      return `./images/heroes/${encodeURIComponent(heroName.toLowerCase().replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '-'))}.webp`;
+    }
+
+    function renderHeroAvatarHTML(heroName) {
+      const src = getHeroImgSrc(heroName);
+      if (!src) {
+        return `<span class="hero-avatar">${FALLBACK_USER_SVG}</span>`;
+      }
+      return `<span class="hero-avatar"><img src="${src}" alt="${heroName}" onerror="this.parentElement.innerHTML='${FALLBACK_USER_SVG.replace(/"/g, '&quot;')}'"></span>`;
+    }
+
+    function renderHeroDisplayLabel(heroName) {
+      return `${t(heroName.toLowerCase().replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '-'))}${HERO_NOTES[heroName] ? '<span class="hero-note-star"> *</span>' : ''}`;
+    }
+
+    function createHeroDropdown(containerId, inputId, heroList, defaultValue) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="hero-select-wrapper" id="${inputId}-wrapper">
+          <input type="hidden" id="${inputId}" value="${defaultValue}">
+          <button type="button" class="hero-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="hero-trigger-avatar">${renderHeroAvatarHTML(defaultValue)}</span>
+            <span class="hero-trigger-name">${renderHeroDisplayLabel(defaultValue)}</span>
+            ${CHEVRON_SVG}
+          </button>
+          <div class="hero-dropdown-menu" role="listbox">
+            <div class="hero-search-box">
+              ${SEARCH_SVG}
+              <input type="text" class="hero-search-input" placeholder="${t("heroSearchPlaceholder")}" autocomplete="off">
+            </div>
+            <div class="hero-options-list"></div>
+          </div>
+        </div>
+      `;
+
+      const wrapper = container.querySelector(".hero-select-wrapper");
+      const hiddenInput = container.querySelector(`#${inputId}`);
+      const triggerBtn = container.querySelector(".hero-select-trigger");
+      const searchInput = container.querySelector(".hero-search-input");
+      const optionsList = container.querySelector(".hero-options-list");
+
+      function renderOptions(filterText = "") {
+        const q = filterText.trim().toLowerCase();
+        const filtered = heroList.filter(h => h.toLowerCase().includes(q));
+        if (!filtered.length) {
+          optionsList.innerHTML = `<div class="hero-empty-msg">${t("heroNotFound")}</div>`;
+          return;
+        }
+        optionsList.innerHTML = filtered.map(h => {
+          const isSelected = h === hiddenInput.value;
+          return `
+            <div class="hero-option-item ${isSelected ? "selected" : ""}" data-value="${h}" role="option" aria-selected="${isSelected}">
+              ${renderHeroAvatarHTML(h)}
+              <span class="hero-option-label">${renderHeroDisplayLabel(h)}</span>
+              ${isSelected ? CHECK_SVG : ""}
+            </div>
+          `;
+        }).join("");
+
+        optionsList.querySelectorAll(".hero-option-item").forEach(item => {
+          item.addEventListener("click", () => {
+            const val = item.getAttribute("data-value");
+            setHeroDropdownValue(inputId, val);
+            closeAllHeroDropdowns();
+            updateBearQuick();
+          });
+        });
+      }
+
+      triggerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const wasOpen = wrapper.classList.contains("open");
+        closeAllHeroDropdowns();
+        if (!wasOpen) {
+          wrapper.classList.add("open");
+          triggerBtn.setAttribute("aria-expanded", "true");
+          searchInput.value = "";
+          renderOptions("");
+          setTimeout(() => searchInput.focus(), 10);
+        }
+      });
+
+      searchInput.addEventListener("click", (e) => e.stopPropagation());
+      searchInput.addEventListener("input", (e) => renderOptions(e.target.value));
+
+      renderOptions("");
+    }
+
+    function setHeroDropdownValue(inputId, val) {
+      const wrapper = document.getElementById(`${inputId}-wrapper`);
+      const hiddenInput = document.getElementById(inputId);
+      if (!wrapper || !hiddenInput) return;
+
+      hiddenInput.value = val;
+      wrapper.querySelector(".hero-trigger-avatar").innerHTML = renderHeroAvatarHTML(val);
+      wrapper.querySelector(".hero-trigger-name").innerHTML = renderHeroDisplayLabel(val);
+    }
+
+    function closeAllHeroDropdowns() {
+      document.querySelectorAll(".hero-select-wrapper.open").forEach(w => {
+        w.classList.remove("open");
+        const btn = w.querySelector(".hero-select-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    document.addEventListener("click", closeAllHeroDropdowns);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeAllHeroDropdowns();
+    });
+
+    function initBearCalculator() {
+      ["infTier", "cavTier", "arcTier"].forEach(id => {
+        const sel = document.getElementById(id);
+        sel.innerHTML = TIER_OPTIONS.map(opt =>
+          `<option value="${opt.value}" ${opt.value === "10-0" ? "selected" : ""}>${opt.label}</option>`
+        ).join("");
+      });
+
+      createHeroDropdown("infHeroContainer", "infHero", LEAD_LISTS.infantry, "Amadeus");
+      createHeroDropdown("cavHeroContainer", "cavHero", LEAD_LISTS.cavalry, "Petra");
+      createHeroDropdown("arcHeroContainer", "arcHero", LEAD_LISTS.archers, "Rosa");
+
+      const defaultJoiners = ["Chenko", "Chenko", "Amane", "Amane"];
+      ["joiner1", "joiner2", "joiner3", "joiner4"].forEach((id, i) => {
+        createHeroDropdown(`${id}Container`, id, JOINER_LIST, defaultJoiners[i]);
+      });
+
+      updateBearQuick();
+    }
+
+    function allocateTroops(total, ratios) {
+      const t = Math.floor(Math.max(0, total));
+      const sumR = UNITS.reduce((acc, u) => acc + Math.max(0, ratios[u]), 0);
+      const exacts = UNITS.map(u => ({ u, exact: t * (sumR > 0 ? Math.max(0, ratios[u]) / sumR : 1 / 3) }));
+      const alloc = Object.fromEntries(exacts.map(x => [x.u, Math.floor(x.exact)]));
+      let rem = t - UNITS.reduce((acc, u) => acc + alloc[u], 0);
+      exacts.sort((a, b) => (b.exact % 1) - (a.exact % 1)).forEach(x => {
+        if (rem-- > 0) alloc[x.u]++;
+      });
+      return alloc;
+    }
+
+    function calcBucketMultiplier(b) {
+      return (1 + b.attack) * (1 + b.lethality) * (1 + b.damage) * (1 + b.extra) * (1 + b.taken) / Math.max(0.05, 1 - Math.min(0.95, b.defenseDown));
+    }
+
+    function isPeriodicActive(skill, turn) {
+      const every = skill.every || 1;
+      const start = every + (skill.offset || 0);
+      return turn >= start && (turn - start) % every < (skill.duration || 1);
+    }
+
+    function getTroopPassiveMultiplier(unit, tier, tg, rng) {
+      const prob = p => (rng ? Number(rng() < p) : p);
+      let mult = 1;
+      if (unit === "archers" && tier >= 7) mult *= 1 + prob(0.10);
+      if (unit === "archers" && tg >= 3) mult *= 1 + prob(tg >= 5 ? 0.30 : 0.20) * (tg >= 8 ? 0.75 : 0.50);
+      if (unit === "cavalry" && tg >= 3) mult *= 1 + prob(tg >= 5 ? 0.15 : 0.10);
+      return mult;
+    }
+
+    function getBearSetup() {
+      const counts = {
+        infantry: Math.max(0, parseInt(document.getElementById("infCount").value) || 0),
+        cavalry: Math.max(0, parseInt(document.getElementById("cavCount").value) || 0),
+        archers: Math.max(0, parseInt(document.getElementById("arcCount").value) || 0)
+      };
+      const totalTroops = counts.infantry + counts.cavalry + counts.archers;
+      const valora = parseFloat(document.getElementById("bearValora").value) || 0;
+
+      const parseUnit = (prefix, unit) => {
+        const [tier, tg] = document.getElementById(prefix + "Tier").value.split("-").map(Number);
+        return {
+          attack: Math.max(0, parseFloat(document.getElementById(prefix + "Atk").value) || 0),
+          lethality: Math.max(0, parseFloat(document.getElementById(prefix + "Leth").value) || 0),
+          tier, tg,
+          baseAtk: BASE_ATK_TABLE[unit][`${tier}-${tg}`] || 472,
+          hero: document.getElementById(prefix + "Hero").value
+        };
+      };
+
+      const troops = {
+        infantry: parseUnit("inf", "infantry"),
+        cavalry: parseUnit("cav", "cavalry"),
+        archers: parseUnit("arc", "archers")
+      };
+
+      const joiners = ["joiner1", "joiner2", "joiner3", "joiner4"].map(id => document.getElementById(id).value);
+
+      const skillInstances = [
+        ...UNITS.map(u => ({ hero: troops[u].hero, joiner: false })),
+        ...joiners.map(h => ({ hero: h, joiner: true }))
+      ].flatMap(entry =>
+        (HERO_SKILLS_DB[entry.hero] || [])
+          .filter(s => !entry.joiner || s.slot === 1)
+          .map(s => ({ skill: s, mag: s.mag, chance: s.chance ?? 1 }))
+      );
+
+      const baseWeights = Object.fromEntries(UNITS.map(u => {
+        const tr = troops[u];
+        const statMult = (1 + tr.attack / 100) * (1 + tr.lethality / 100);
+        return [u, tr.baseAtk * statMult * (u === "archers" ? 1.1 : 1) * (1 + valora / 100)];
+      }));
+
+      return { counts, totalTroops, valora, troops, joiners, skillInstances, baseWeights };
+    }
+
+    function computeExpectedWeights(setup) {
+      const weights = { infantry: 0, cavalry: 0, archers: 0 };
+      const turns = 10;
+      for (let t = 1; t <= turns; t++) {
+        UNITS.forEach(u => {
+          const buckets = { attack: 0, lethality: 0, damage: 0, extra: 0, taken: 0, defenseDown: 0 };
+          setup.skillInstances.forEach(({ skill, mag, chance }) => {
+            if (skill.name === "Evil Eye" || (skill.units && !skill.units.includes(u))) return;
+            const activeProb = skill.every
+              ? Number(isPeriodicActive(skill, t))
+              : 1 - Math.pow(1 - chance, Math.min(t, skill.duration || 1));
+            buckets[skill.group] += mag * activeProb;
+          });
+
+          if (t > 1) {
+            const eyes = setup.skillInstances.filter(x => x.skill.name === "Evil Eye");
+            if (eyes.length) {
+              const failAll = eyes.reduce((acc, x) => acc * Math.pow(1 - x.chance, UNITS.length * Math.min(t - 1, x.skill.duration || 1)), 1);
+              buckets.taken += 0.50 * (1 - failAll);
+            }
+          }
+
+          weights[u] += setup.baseWeights[u] * calcBucketMultiplier(buckets) * getTroopPassiveMultiplier(u, setup.troops[u].tier, setup.troops[u].tg, null) / 10;
+        });
+      }
+      return weights;
+    }
+
+    function calcDamageIndex(weights, alloc) {
+      return UNITS.reduce((acc, u) => acc + weights[u] * Math.sqrt(alloc[u]), 0) / REF_NORM * 100;
+    }
+
+    function indexToPoints(idx) {
+      return (idx / 100) * REF_NORM * FORMULA_SCALE;
+    }
+
+    function updateBearQuick() {
+      const setup = getBearSetup();
+      document.getElementById("bearTotalTroops").textContent = setup.totalTroops.toLocaleString();
+
+      const activeHeroes = [...new Set([...UNITS.map(u => setup.troops[u].hero), ...setup.joiners])];
+      const notes = activeHeroes.map(h => HERO_NOTES[h]).filter(Boolean);
+      if (setup.troops.archers.tier === 11 && setup.troops.archers.tg === 8) {
+        notes.push("T11-TG8 Archers: damage estimates are provisional and may differ slightly.");
+      }
+      document.getElementById("bearHeroNote").textContent = notes.join(" ");
+
+      if (setup.totalTroops <= 0) return;
+
+      const weights = computeExpectedWeights(setup);
+      let bestRatios = { infantry: 10, cavalry: 10, archers: 80 };
+      let bestIndex = -1;
+
+      for (let rInf = 1; rInf <= 98; rInf++) {
+        for (let rCav = 1; rCav <= 99 - rInf; rCav++) {
+          const rArc = 100 - rInf - rCav;
+          const cand = { infantry: rInf, cavalry: rCav, archers: rArc };
+          const idx = calcDamageIndex(weights, allocateTroops(setup.totalTroops, cand));
+          if (idx > bestIndex) {
+            bestIndex = idx;
+            bestRatios = cand;
+          }
+        }
+      }
+
+      const bestAlloc = allocateTroops(setup.totalTroops, bestRatios);
+      const classicAlloc = allocateTroops(setup.totalTroops, { infantry: 10, cavalry: 10, archers: 80 });
+      const classicIndex = calcDamageIndex(weights, classicAlloc);
+      const gainPct = classicIndex > 0 ? ((bestIndex / classicIndex - 1) * 100).toFixed(1) : "0.0";
+
+      currentBestMix = { allocation: bestAlloc, ratios: bestRatios };
+
+      document.getElementById("bearQuickRatio").textContent = `${bestRatios.infantry} / ${bestRatios.cavalry} / ${bestRatios.archers}`;
+      document.getElementById("barRatioInf").style.width = `${bestRatios.infantry}%`;
+      document.getElementById("barRatioCav").style.width = `${bestRatios.cavalry}%`;
+      document.getElementById("barRatioArc").style.width = `${bestRatios.archers}%`;
+
+      document.getElementById("recInfCount").textContent = bestAlloc.infantry.toLocaleString();
+      document.getElementById("recCavCount").textContent = bestAlloc.cavalry.toLocaleString();
+      document.getElementById("recArcCount").textContent = bestAlloc.archers.toLocaleString();
+      document.getElementById("bearVsBaseBadge").textContent = `${Number(gainPct) >= 0 ? "+" : ""}${gainPct}% vs 10/10/80`;
+      document.getElementById("bearReportCard").style.display = "none";
+    }
+
+    function applyRecommendedToMarch() {
+      document.getElementById("infCount").value = currentBestMix.allocation.infantry;
+      document.getElementById("cavCount").value = currentBestMix.allocation.cavalry;
+      document.getElementById("arcCount").value = currentBestMix.allocation.archers;
+      updateBearQuick();
+    }
+
+    function resetBearCalc() {
+      ["infCount", "cavCount", "arcCount"].forEach(id => document.getElementById(id).value = 50000);
+      ["infAtk", "infLeth", "cavAtk", "cavLeth", "arcAtk", "arcLeth"].forEach(id => document.getElementById(id).value = 400);
+      document.getElementById("bearValora").value = "0";
+      initBearCalculator();
+    }
+
+    function generateBearReport() {
+      const setup = getBearSetup();
+      if (setup.totalTroops <= 0) return;
+
+      const runs = 1000;
+      let seed = (0x9e3779b9 ^ 685) >>> 0;
+      const rng = () => {
+        let t = Math.imul((seed = (seed + 0x6d2b79f5) >>> 0) ^ (seed >>> 15), 1 | seed);
+        return (((t ^= t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ (t >>> 14)) >>> 0) / 0x100000000;
+      };
+
+      const simWeights = [];
+      for (let r = 0; r < runs; r++) {
+        const w = { infantry: 0, cavalry: 0, archers: 0 };
+        const activeUntil = setup.skillInstances.map(() => 0);
+        let curse = 0;
+
+        for (let turn = 1; turn <= 10; turn++) {
+          const activeFlags = setup.skillInstances.map(({ skill, chance }, idx) => {
+            if (skill.name === "Evil Eye" || skill.name === "The Favor") return false;
+            if (skill.every) return isPeriodicActive(skill, turn);
+            if (chance >= 1 || rng() < chance) activeUntil[idx] = turn + (skill.duration || 1);
+            return activeUntil[idx] > turn;
+          });
+
+          UNITS.forEach(u => {
+            const buckets = { attack: 0, lethality: 0, damage: 0, extra: 0, taken: 0, defenseDown: 0 };
+            setup.skillInstances.forEach(({ skill, mag }, idx) => {
+              if (activeFlags[idx] && (!skill.units || skill.units.includes(u))) {
+                buckets[skill.group] += mag;
+              }
+            });
+            setup.skillInstances.filter(x => x.skill.name === "The Favor").forEach(x => {
+              if (rng() < x.chance) buckets[x.skill.group] += x.mag;
+            });
+            buckets.taken += curse;
+            w[u] += setup.baseWeights[u] * calcBucketMultiplier(buckets) * getTroopPassiveMultiplier(u, setup.troops[u].tier, setup.troops[u].tg, rng) / 10;
+          });
+
+          curse = 0;
+          setup.skillInstances.filter(x => x.skill.name === "Evil Eye").forEach(x => {
+            UNITS.forEach(() => {
+              if (rng() < x.chance) curse = Math.max(curse, x.mag);
+            });
+          });
+        }
+        simWeights.push(w);
+      }
+
+      const summarize = alloc => {
+        const samples = simWeights.map(w => indexToPoints(calcDamageIndex(w, alloc)));
+        const sorted = [...samples].sort((a, b) => a - b);
+        const pct = q => {
+          const pos = (sorted.length - 1) * q;
+          const lo = Math.floor(pos), hi = Math.ceil(pos);
+          return sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
+        };
+        return {
+          mean: samples.reduce((a, b) => a + b, 0) / samples.length,
+          p10: pct(0.1),
+          p90: pct(0.9),
+          samples
+        };
+      };
+
+      const classicAlloc = allocateTroops(setup.totalTroops, { infantry: 10, cavalry: 10, archers: 80 });
+      const plans = [
+        { key: "bearMarchRec", alloc: currentBestMix.allocation, color: "#10b981" },
+        { key: "bearMarchYours", alloc: setup.counts, color: "#3b82f6" },
+        { key: "bearMarchBase", alloc: classicAlloc, color: "#94a3b8" }
+      ];
+
+      lastBearReport = plans.map(p => ({ ...p, ...summarize(p.alloc) }));
+      renderBearReport(lastBearReport);
+      document.getElementById("bearReportCard").style.display = "block";
+    }
+
+    function formatBearDmg(num) {
+      if (Math.abs(num) >= 1e6) return (num / 1e6).toFixed(2) + "M";
+      if (Math.abs(num) >= 1e3) return (num / 1e3).toFixed(1) + "K";
+      return Math.round(num).toLocaleString();
+    }
+
+    function renderBearReport(rows) {
+      const maxVal = Math.max(...rows.map(r => r.p90), 1);
+      document.getElementById("bearBarsContainer").innerHTML = rows.map(r => `
+        <div style="margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; font-size:0.88rem;">
+            <strong>${t(r.key)}</strong>
+            <span>${formatBearDmg(r.mean)} <span style="color:var(--text-muted); font-size:0.8rem;">(P10: ${formatBearDmg(r.p10)} – P90: ${formatBearDmg(r.p90)})</span></span>
+          </div>
+          <div class="bear-bar-track"><div class="bear-bar-fill" style="width:${(r.mean / maxVal * 100).toFixed(1)}%; background:${r.color};"></div></div>
+        </div>
+      `).join("");
+
+      document.getElementById("bearCompareTbody").innerHTML = rows.map(r => `
+        <tr>
+          <td><strong>${t(r.key)}</strong></td>
+          <td>${r.alloc.infantry.toLocaleString()} / ${r.alloc.cavalry.toLocaleString()} / ${r.alloc.archers.toLocaleString()}</td>
+          <td><strong>${formatBearDmg(r.mean)}</strong></td>
+          <td>${formatBearDmg(r.p10)} – ${formatBearDmg(r.p90)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function downloadBlob(content, filename, type) {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([content], { type }));
+      a.download = filename;
+      a.click();
+    }
+
+    function exportBearJSON() {
+      if (!lastBearReport) return;
+      const clean = lastBearReport.map(({ samples, ...rest }) => rest);
+      downloadBlob(JSON.stringify({ recommended: currentBestMix, comparison: clean }, null, 2), "bear-hunt-report.json", "application/json");
+    }
+
+    function exportBearCSV() {
+      if (!lastBearReport) return;
+      let csv = "sample,recommended_damage_points,current_damage_points,classic_10_10_80_points\n";
+      for (let i = 0; i < lastBearReport[0].samples.length; i++) {
+        csv += `${i + 1},${lastBearReport[0].samples[i].toFixed(1)},${lastBearReport[1].samples[i].toFixed(1)},${lastBearReport[2].samples[i].toFixed(1)}\n`;
+      }
+      downloadBlob(csv, "bear-hunt-samples.csv", "text/csv;charset=utf-8");
+    }
+
+    function exportBearPNG() {
+      if (!lastBearReport) return;
+      const canvas = document.createElement("canvas");
+      canvas.width = 760; canvas.height = 380;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#181b22"; ctx.fillRect(0, 0, 760, 380);
+      ctx.fillStyle = "#10b981"; ctx.fillRect(0, 0, 760, 8);
+      ctx.fillStyle = "#ffffff"; ctx.font = "bold 22px sans-serif";
+      const r = currentBestMix.ratios, a = currentBestMix.allocation;
+      ctx.fillText(`Kingshot Bear Ratio: ${r.infantry} / ${r.cavalry} / ${r.archers}`, 30, 52);
+      ctx.font = "16px sans-serif"; ctx.fillStyle = "#94a3b8";
+      ctx.fillText(`Recommended Troops: Inf ${a.infantry.toLocaleString()} | Cav ${a.cavalry.toLocaleString()} | Arc ${a.archers.toLocaleString()}`, 30, 84);
+      lastBearReport.forEach((row, idx) => {
+        const y = 145 + idx * 68;
+        ctx.fillStyle = row.color; ctx.font = "bold 16px sans-serif";
+        ctx.fillText(`${t(row.key)}: Avg ${formatBearDmg(row.mean)}  (P10: ${formatBearDmg(row.p10)} - P90: ${formatBearDmg(row.p90)})`, 30, y);
+      });
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "bear-hunt-report.png";
+      link.click();
+    }
+
+    // Initialize the bear calculator when the page loads
+    initBearCalculator();
   </script>
 </body>
 </html>
