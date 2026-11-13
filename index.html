@@ -970,11 +970,11 @@
             <label data-i18n="bearAtk">攻擊 %</label>
             <select id="allianceAtk" onchange="updateBearQuick()">
               <option value="0" data-lv="0" data-pct="0">無 (0%)</option>
-              <option value="5" data-lv="1" data-pct="5">等級1 / Lv. 1 (5%)</option>
-              <option value="10" data-lv="2" data-pct="10">等級2 / Lv. 2 (10%)</option>
-              <option value="15" data-lv="3" data-pct="15">等級3 / Lv. 3 (15%)</option>
-              <option value="20" data-lv="4" data-pct="20">等級4 / Lv. 4 (20%)</option>
-              <option value="25" data-lv="5" data-pct="25">等級5 / Lv. 5 (25%)</option>
+              <option value="5" data-lv="1" data-pct="5">等級1 (5%)</option>
+              <option value="10" data-lv="2" data-pct="10">等級2 (10%)</option>
+              <option value="15" data-lv="3" data-pct="15">等級3 (15%)</option>
+              <option value="20" data-lv="4" data-pct="20">等級4 (20%)</option>
+              <option value="25" data-lv="5" data-pct="25">等級5 (25%)</option>
             </select>
           </div>
         </div>
@@ -988,16 +988,16 @@
             <label data-i18n="bearAtk">攻擊 %</label>
             <select id="wildCharge" onchange="updateBearQuick()">
               <option value="0" data-lv="0" data-pct="0">無 (0%)</option>
-              <option value="2.5" data-lv="1" data-pct="2.5">等級1 / Lv. 1 (2.5%)</option>
-              <option value="3" data-lv="2" data-pct="3">等級2 / Lv. 2 (3%)</option>
-              <option value="3.5" data-lv="3" data-pct="3.5">等級3 / Lv. 3 (3.5%)</option>
-              <option value="4" data-lv="4" data-pct="4">等級4 / Lv. 4 (4%)</option>
-              <option value="5" data-lv="5" data-pct="5">等級5 / Lv. 5 (5%)</option>
-              <option value="6" data-lv="6" data-pct="6">等級6 / Lv. 6 (6%)</option>
-              <option value="7" data-lv="7" data-pct="7">等級7 / Lv. 7 (7%)</option>
-              <option value="8" data-lv="8" data-pct="8">等級8 / Lv. 8 (8%)</option>
-              <option value="9" data-lv="9" data-pct="9">等級9 / Lv. 9 (9%)</option>
-              <option value="10" data-lv="10" data-pct="10">等級10 / Lv. 10 (10%)</option>
+              <option value="2.5" data-lv="1" data-pct="2.5">等級1 (2.5%)</option>
+              <option value="3" data-lv="2" data-pct="3">等級2 (3%)</option>
+              <option value="3.5" data-lv="3" data-pct="3.5">等級3 (3.5%)</option>
+              <option value="4" data-lv="4" data-pct="4">等級4 (4%)</option>
+              <option value="5" data-lv="5" data-pct="5">等級5 (5%)</option>
+              <option value="6" data-lv="6" data-pct="6">等級6 (6%)</option>
+              <option value="7" data-lv="7" data-pct="7">等級7 (7%)</option>
+              <option value="8" data-lv="8" data-pct="8">等級8 (8%)</option>
+              <option value="9" data-lv="9" data-pct="9">等級9 (9%)</option>
+              <option value="10" data-lv="10" data-pct="10">等級10 (10%)</option>
             </select>
           </div>
         </div>
@@ -1299,7 +1299,7 @@
         bearTroopsDmgUpTitle: "部隊傷害提升",
         bearTroopsAtkUpTitle: "部隊攻擊提升",
         levelOptionNone: "無 (0%)",
-        levelOption: (lv, pct) => `等級${lv} / Lv. ${lv} (${pct}%)`,
+        levelOption: (lv, pct) => `等級${lv} (${pct}%)`,
 
         alcar: "阿爾卡",
         amadeus: "阿瑪迪斯",
@@ -1914,6 +1914,6 @@
   </script>
 
   <!-- External Bear Ratio Calculator Engine & Hero Dropdowns -->
-  <script src="./js/bear-calc.js"></script>
+  <script src="./js/bear-calc-min.js"></script>
 </body>
 </html>
