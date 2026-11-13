@@ -475,6 +475,8 @@
     .bear-troop-box.inf { border-top: 3px solid #f43f5e; }
     .bear-troop-box.cav { border-top: 3px solid #0ea5e9; }
     .bear-troop-box.arc { border-top: 3px solid #10b981; }
+    .bear-troop-box.buff { border-top: 3px solid var(--accent-color); }
+    .bear-troop-box.buff2 { border-top: 3px solid #8b5cf6; }
 
     .bear-troop-title {
       font-weight: 700;
@@ -939,11 +941,88 @@
               <option value="21">21%</option>
               <option value="24">24%</option>
               <option value="27">27%</option>
-							<option value="30">30%</option>
+              <option value="30">30%</option>
             </select>
           </div>
         </div>
         <button class="btn-secondary" onclick="resetBearCalc()" data-i18n="bearResetBtn">重設預設值</button>
+      </div>
+
+      <!-- Row 1: Squad Attack, Squad Lethality, Alliance Attack Dropdown -->
+      <div class="bear-troop-grid" style="margin-bottom: 14px;">
+        <div class="bear-troop-box buff">
+          <div class="bear-troop-title"><span data-i18n="bearSquadAtkTitle">部隊攻擊力</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearAtk">攻擊 %</label>
+            <input type="number" id="squadAtk" value="0" step="25" oninput="updateBearQuick()">
+          </div>
+        </div>
+        <div class="bear-troop-box buff">
+          <div class="bear-troop-title"><span data-i18n="bearSquadLethTitle">部隊殺傷力</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearLeth">殺傷 %</label>
+            <input type="number" id="squadLeth" value="0" step="25" oninput="updateBearQuick()">
+          </div>
+        </div>
+        <div class="bear-troop-box buff">
+          <div class="bear-troop-title"><span data-i18n="bearAllianceAtkTitle">聯盟攻擊力</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearAtk">攻擊 %</label>
+            <select id="allianceAtk" onchange="updateBearQuick()">
+              <option value="0" data-lv="0" data-pct="0">無 (0%)</option>
+              <option value="5" data-lv="1" data-pct="5">等級1 / Lv. 1 (5%)</option>
+              <option value="10" data-lv="2" data-pct="10">等級2 / Lv. 2 (10%)</option>
+              <option value="15" data-lv="3" data-pct="15">等級3 / Lv. 3 (15%)</option>
+              <option value="20" data-lv="4" data-pct="20">等級4 / Lv. 4 (20%)</option>
+              <option value="25" data-lv="5" data-pct="25">等級5 / Lv. 5 (25%)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Wild Charge, Troops Damage Up, Troops Attack Up -->
+      <div class="bear-troop-grid" style="margin-bottom: 18px;">
+        <div class="bear-troop-box buff2">
+          <div class="bear-troop-title"><span data-i18n="bearWildChargeTitle">野蠻衝撞</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearAtk">攻擊 %</label>
+            <select id="wildCharge" onchange="updateBearQuick()">
+              <option value="0" data-lv="0" data-pct="0">無 (0%)</option>
+              <option value="2.5" data-lv="1" data-pct="2.5">等級1 / Lv. 1 (2.5%)</option>
+              <option value="3" data-lv="2" data-pct="3">等級2 / Lv. 2 (3%)</option>
+              <option value="3.5" data-lv="3" data-pct="3.5">等級3 / Lv. 3 (3.5%)</option>
+              <option value="4" data-lv="4" data-pct="4">等級4 / Lv. 4 (4%)</option>
+              <option value="5" data-lv="5" data-pct="5">等級5 / Lv. 5 (5%)</option>
+              <option value="6" data-lv="6" data-pct="6">等級6 / Lv. 6 (6%)</option>
+              <option value="7" data-lv="7" data-pct="7">等級7 / Lv. 7 (7%)</option>
+              <option value="8" data-lv="8" data-pct="8">等級8 / Lv. 8 (8%)</option>
+              <option value="9" data-lv="9" data-pct="9">等級9 / Lv. 9 (9%)</option>
+              <option value="10" data-lv="10" data-pct="10">等級10 / Lv. 10 (10%)</option>
+            </select>
+          </div>
+        </div>
+        <div class="bear-troop-box buff2">
+          <div class="bear-troop-title"><span data-i18n="bearTroopsDmgUpTitle">部隊傷害提升</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearLeth">殺傷 %</label>
+            <select id="troopsDamageUp" onchange="updateBearQuick()">
+              <option value="0" selected>0%</option>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+            </select>
+          </div>
+        </div>
+        <div class="bear-troop-box buff2">
+          <div class="bear-troop-title"><span data-i18n="bearTroopsAtkUpTitle">部隊攻擊提升</span></div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label data-i18n="bearAtk">攻擊 %</label>
+            <select id="troopsAttackUp" onchange="updateBearQuick()">
+              <option value="0" selected>0%</option>
+              <option value="10">10%</option>
+              <option value="20">20%</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <div class="bear-troop-grid">
@@ -1117,6 +1196,7 @@
     let currentLang = "zh";
     let lastSearchedRange = "";
     let lastTargetData = null;
+    let lastBearReport = null;
 
     const i18n = {
       zh: {
@@ -1211,42 +1291,50 @@
         bearMarchBase: "傳統 10/10/80",
         heroSearchPlaceholder: "搜尋英雄...",
         heroNotFound: "找不到英雄",
-				bearValoraLabel: "維拉：",
+        bearValoraLabel: "維拉：",
+        bearSquadAtkTitle: "部隊攻擊力",
+        bearSquadLethTitle: "部隊殺傷力",
+        bearAllianceAtkTitle: "聯盟攻擊力",
+        bearWildChargeTitle: "野蠻衝撞",
+        bearTroopsDmgUpTitle: "部隊傷害提升",
+        bearTroopsAtkUpTitle: "部隊攻擊提升",
+        levelOptionNone: "無 (0%)",
+        levelOption: (lv, pct) => `等級${lv} / Lv. ${lv} (${pct}%)`,
 
-				alcar: "阿爾卡",
-				amadeus: "阿瑪迪斯",
-				amane: "雨音",
-				ava: "艾娃",
-				charles: "查爾斯",
-				chenko: "琴科",
-				diana: "狄安娜",
-				diego: "迭戈",
-				eric: "艾瑞克",
-				fahd: "法赫德",
-				gordon: "戈登",
-				hilde: "希爾德",
-				helga: "赫爾加",
-				howard: "霍華德",
-				jabel: "潔貝爾",
-				jaeger: "耶格爾",
-				liz: "莉茲",
-				longfei: "龍飛",
-				luna: "露娜",
-				margot: "瑪爾戈",
-				marlin: "馬林",
-				petra: "佩特拉",
-				quinn: "奎恩",
-				rosa: "羅莎",
-				saul: "薩洛",
-				sophia: "索菲亞",
-				thrud: "瑟魯德",
-				triton: "崔頓",
-				vivian: "薇薇安",
-				"wee-woo": "威與伍",
-				yang: "楊",
-				yeonwoo: "妍羽",
-				zoe: "佐伊",
-				none: "None",
+        alcar: "阿爾卡",
+        amadeus: "阿瑪迪斯",
+        amane: "雨音",
+        ava: "艾娃",
+        charles: "查爾斯",
+        chenko: "琴科",
+        diana: "狄安娜",
+        diego: "迭戈",
+        eric: "艾瑞克",
+        fahd: "法赫德",
+        gordon: "戈登",
+        hilde: "希爾德",
+        helga: "赫爾加",
+        howard: "霍華德",
+        jabel: "潔貝爾",
+        jaeger: "耶格爾",
+        liz: "莉茲",
+        longfei: "龍飛",
+        luna: "露娜",
+        margot: "瑪爾戈",
+        marlin: "馬林",
+        petra: "佩特拉",
+        quinn: "奎恩",
+        rosa: "羅莎",
+        saul: "薩洛",
+        sophia: "索菲亞",
+        thrud: "瑟魯德",
+        triton: "崔頓",
+        vivian: "薇薇安",
+        "wee-woo": "威與伍",
+        yang: "楊",
+        yeonwoo: "妍羽",
+        zoe: "佐伊",
+        none: "None",
       },
       en: {
         pageTitle: "Kingshot Tools | Hot×Gie",
@@ -1340,42 +1428,50 @@
         bearMarchBase: "Standard 10/10/80",
         heroSearchPlaceholder: "Search heroes...",
         heroNotFound: "No heroes found.",
-				bearValoraLabel: "Valora：",
-				
-				alcar: "Alcar",
-				amadeus: "Amadeus",
-				amane: "Amane",
-				ava: "Ava",
-				charles: "Charles",
-				chenko: "Chenko",
-				diana: "Diana",
-				diego: "Diego",
-				eric: "Eric",
-				fahd: "Fahd",
-				gordon: "Gordon",
-				hilde: "Hilde",
-				helga: "Helga",
-				howard: "Howard",
-				jabel: "Jabel",
-				jaeger: "Jaeger",
-				liz: "Liz",
-				longfei: "Long Fei",
-				luna: "Luna",
-				margot: "Margot",
-				marlin: "Marlin",
-				petra: "Petra",
-				quinn: "Quinn",
-				rosa: "Rosa",
-				saul: "Saul",
-				sophia: "Sophia",
-				thrud: "Thrud",
-				triton: "Triton",
-				vivian: "Vivian",
-				"wee-woo": "Wee & Woo",
-				yang: "Yang",
-				yeonwoo: "Yeonwoo",
-				zoe: "Zoe",
-				none: "None",
+        bearValoraLabel: "Valora：",
+        bearSquadAtkTitle: "Squad's Attack",
+        bearSquadLethTitle: "Squad's Lethality",
+        bearAllianceAtkTitle: "Alliance Attack",
+        bearWildChargeTitle: "Wild Charge",
+        bearTroopsDmgUpTitle: "Troops Damage Up",
+        bearTroopsAtkUpTitle: "Troops Attack Up",
+        levelOptionNone: "None (0%)",
+        levelOption: (lv, pct) => `Lv. ${lv} (${pct}%)`,
+        
+        alcar: "Alcar",
+        amadeus: "Amadeus",
+        amane: "Amane",
+        ava: "Ava",
+        charles: "Charles",
+        chenko: "Chenko",
+        diana: "Diana",
+        diego: "Diego",
+        eric: "Eric",
+        fahd: "Fahd",
+        gordon: "Gordon",
+        hilde: "Hilde",
+        helga: "Helga",
+        howard: "Howard",
+        jabel: "Jabel",
+        jaeger: "Jaeger",
+        liz: "Liz",
+        longfei: "Long Fei",
+        luna: "Luna",
+        margot: "Margot",
+        marlin: "Marlin",
+        petra: "Petra",
+        quinn: "Quinn",
+        rosa: "Rosa",
+        saul: "Saul",
+        sophia: "Sophia",
+        thrud: "Thrud",
+        triton: "Triton",
+        vivian: "Vivian",
+        "wee-woo": "Wee & Woo",
+        yang: "Yang",
+        yeonwoo: "Yeonwoo",
+        zoe: "Zoe",
+        none: "None",
       }
     };
 
@@ -1407,6 +1503,14 @@
         const g = opt.getAttribute("data-group");
         const r = opt.getAttribute("data-range");
         opt.textContent = t("groupOption", g, r);
+      });
+
+      ["#allianceAtk option", "#wildCharge option"].forEach(selector => {
+        document.querySelectorAll(selector).forEach(opt => {
+          const lv = opt.getAttribute("data-lv");
+          const pct = opt.getAttribute("data-pct");
+          opt.textContent = lv === "0" ? t("levelOptionNone") : t("levelOption", lv, pct);
+        });
       });
 
       const rangeTitle = document.getElementById("rangeTitle");
@@ -1447,16 +1551,8 @@
         updateSummaryUI();
       }
 
-			document.querySelector("#infHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#infHero").value);
-			document.querySelector("#cavHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#cavHero").value);
-			document.querySelector("#arcHero-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#arcHero").value);
-			document.querySelector("#joiner1-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner1").value);
-			document.querySelector("#joiner2-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner2").value);
-			document.querySelector("#joiner3-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner3").value);
-			document.querySelector("#joiner4-wrapper .hero-trigger-name").innerHTML = renderHeroDisplayLabel(document.querySelector("#joiner4").value);
-
-      if (lastBearReport) {
-        renderBearReport(lastBearReport);
+      if (typeof updateBearLanguage === "function") {
+        updateBearLanguage();
       }
     }
 
@@ -1815,563 +1911,9 @@
         setControlsDisabled(false);
       }
     }
-
-    /* =========================================
-       TAB 3: EXACT KINGSHOTGUIDE BEAR CALCULATOR ENGINE + CUSTOM PORTRAIT DROPDOWNS
-       ========================================= */
-    const UNITS = ["infantry", "cavalry", "archers"];
-    const TIER_OPTIONS = [
-      { value: "6-0", label: "T6" },
-      { value: "9-0", label: "T9" },
-      { value: "10-0", label: "T10" },
-      ...Array.from({ length: 8 }, (_, i) => ({ value: `10-${i + 1}`, label: `T10-TG${i + 1}` })),
-      ...Array.from({ length: 4 }, (_, i) => ({ value: `11-${i + 5}`, label: `T11-TG${i + 5}` }))
-    ];
-
-    const BASE_ATK_TABLE = {
-      infantry: {
-        "6-0": 243, "9-0": 400, "10-0": 472,
-        "10-1": 491, "10-2": 515, "10-3": 541, "10-4": 568, "10-5": 597, "10-6": 626, "10-7": 657, "10-8": 690,
-        "11-5": 700, "11-6": 735, "11-7": 771, "11-8": 809
-      },
-      cavalry: {
-        "6-0": 730, "9-0": 1200, "10-0": 1416,
-        "10-1": 1473, "10-2": 1546, "10-3": 1624, "10-4": 1705, "10-5": 1790, "10-6": 1879, "10-7": 1973, "10-8": 2072,
-        "11-5": 2108, "11-6": 2213, "11-7": 2323, "11-8": 2439
-      },
-      archers: {
-        "6-0": 974, "9-0": 1600, "10-0": 1888,
-        "10-1": 1964, "10-2": 2062, "10-3": 2165, "10-4": 2273, "10-5": 2387, "10-6": 2506, "10-7": 2631, "10-8": 2763,
-        "11-5": 2812, "11-6": 2952, "11-7": 3099, "11-8": 3255
-      }
-    };
-
-    const LEAD_LISTS = {
-      infantry: ["None", "Diego", "Charles", "Amadeus", "Triton", "Long Fei", "Alcar", "Howard", "Eric", "Zoe", "Helga"],
-      cavalry: ["None", "Liz", "Ava", "Petra", "Thrud", "Sophia", "Jabel", "Chenko", "Gordon", "Fahd", "Margot"],
-      archers: ["None", "Luna", "Wee & Woo", "Yang", "Vivian", "Rosa", "Amane", "Yeonwoo", "Quinn", "Saul", "Marlin"]
-    };
-
-    const JOINER_LIST = ["None", "Chenko", "Amane", "Hilde", "Yeonwoo", "Petra", "Margot", "Ava", "Wee & Woo"];
-
-    const HERO_NOTES = {
-      Petra: "Petra: Evil Eye can boost damage from all three troop types. Multiple Petra joiners do not add separate curse bonuses.",
-      Yang: "Yang: Ambush is excluded because its damage bonus is unknown. This estimate may understate his contribution.",
-      Triton: "Triton: his skill damage bonus is not included, so selecting him adds no damage in this calculator.",
-      Sophia: "Sophia: Terror skill timing is approximate, which can affect her estimated damage.",
-      Vivian: "Vivian: the timing of her target debuffs is approximate, which can affect her estimated damage.",
-      Alcar: "Alcar: the timing of his target debuffs is approximate, which can affect his estimated damage."
-    };
-
-    const sk = (slot, name, group, mag, opts = {}) => ({ slot, name, group, mag, ...opts });
-
-    const HERO_SKILLS_DB = {
-      Amadeus: [sk(1, "Battle Ready", "lethality", 0.25), sk(2, "Way of the Blade", "attack", 0.25), sk(3, "Unrighteous Strike", "damage", 0.50, { chance: 0.40 })],
-      Rosa: [sk(1, "Chaos Gambit", "damage", 0.50, { chance: 0.40 }), sk(3, "Golden Rhythm", "attack", 0.30, { units: ["archers"] })],
-      Petra: [sk(1, "Evil Eye", "taken", 0.50, { chance: 0.50 }), sk(2, "The Favor", "damage", 0.50, { chance: 0.50 })],
-      Alcar: [sk(2, "Praetorian Will", "damage", 1.00, { units: ["infantry"] }), sk(2, "Praetorian Will (other)", "damage", 0.10, { units: ["cavalry", "archers"] }), sk(3, "Carpe Diem", "extra", 0.60, { units: ["infantry"] }), sk(3, "Carpe Diem (target)", "taken", 0.25)],
-      Margot: [sk(1, "Warbringer", "attack", 0.25), sk(3, "Sleight Hand", "extra", 2.00, { chance: 0.25, units: ["cavalry"] })],
-      Chenko: [sk(1, "Stand of Arms", "lethality", 0.25)],
-      Amane: [sk(1, "Tri-Phalanx", "attack", 0.25)],
-      Yeonwoo: [sk(1, "On Guard", "lethality", 0.25)],
-      Hilde: [sk(1, "Noble Path", "attack", 0.15), sk(2, "Elixir of Strength", "extra", 2.00, { chance: 0.25 })],
-      Zoe: [sk(1, "Sundering", "extra", 0.40, { chance: 0.20, duration: 3 }), sk(2, "Charisma", "attack", 0.25), sk(3, "Infinite", "taken", 0.50, { chance: 0.50 })],
-      Marlin: [sk(1, "Wild Card", "damage", 0.50, { chance: 0.40 }), sk(3, "Dynamo", "damage", 0.50, { chance: 0.50 })],
-      Jabel: [sk(2, "Hero's Domain", "extra", 0.50, { chance: 0.50 }), sk(3, "Youthful Rage", "damage", 0.25)],
-      Quinn: [sk(2, "Precision Shot", "extra", 0.50, { chance: 0.50 })],
-      Gordon: [sk(2, "Trash Talk", "attack", 0.25)],
-      Saul: [sk(3, "Positional", "lethality", 0.25)],
-      Helga: [sk(2, "Echoes of Valhalla", "attack", 0.25), sk(3, "Nature's Balance", "lethality", 0.25)],
-      Jaeger: [sk(1, "The Tempest", "damage", 0.40, { chance: 0.20, duration: 3 })],
-      Thrud: [sk(1, "Battle Fever", "damage", 0.15, { units: ["infantry", "archers"] }), sk(2, "Brutal Charge", "extra", 1.00, { units: ["cavalry"], chance: 0.20 }), sk(3, "Ancestral Spirits", "damage", 0.25, { every: 4, duration: 2 })],
-      Vivian: [sk(1, "Patient Commander", "taken", 0.25), sk(2, "Expose Weakness", "extra", 1.00, { every: 4 }), sk(2, "Expose Weakness (target)", "taken", 0.15, { every: 4 }), sk(3, "Coin Traps", "extra", 0.60, { units: ["archers"], every: 4, offset: 1 })],
-      "Long Fei": [sk(3, "War Wisdom", "extra", 2.00, { chance: 0.25 })],
-      Yang: [sk(1, "Avalanche", "extra", 1.00, { every: 4 }), sk(2, "Ice Zone", "extra", 1.00, { chance: 0.40, units: ["archers"] })],
-      Sophia: [sk(2, "Terror – Deathblow", "taken", 2.00, { every: 2, offset: 1, units: ["cavalry"] }), sk(3, "Terror – Annihilation", "damage", 0.75, { every: 2, offset: 1 })],
-      Ava: [sk(1, "Dissolution", "defenseDown", 0.25), sk(2, "Chiaroscuro", "taken", 0.50, { every: 4, duration: 2 }), sk(3, "Light and Cold", "lethality", 0.25)],
-      "Wee & Woo": [sk(1, "Artillerymen", "attack", 0.15), sk(1, "Artillerymen (leth)", "lethality", 0.10), sk(2, "Chain Shelling", "damage", 0.25), sk(3, "Boom Boom", "extra", 0.50, { chance: 0.50 })],
-      Diego: [sk(2, "Piercing Aura", "extra", 0.50, { chance: 0.50 }), sk(3, "Cold Frost", "lethality", 0.25)],
-      Liz: [sk(1, "Alloyed Agent", "lethality", 0.50, { chance: 0.50 }), sk(3, "Horsemaster", "extra", 1.50, { chance: 0.50, units: ["cavalry"] })],
-      Luna: [sk(1, "Driving Light", "attack", 0.25), sk(3, "Arrowflash", "extra", 0.50, { units: ["archers"] })],
-      Howard: [], Eric: [], Charles: [], Fahd: [], Diana: [], Olive: [], Edwin: [], Seth: [], Forrest: [], Triton: [], None: []
-    };
-
-    const REF_NORM = 11800 * Math.sqrt(15000) + 35400 * Math.sqrt(15000) + 47200 * 1.1 * 1.1 * Math.sqrt(120000);
-    const FORMULA_SCALE = 0.0012 * Math.sqrt(5000);
-
-    let currentBestMix = { allocation: { infantry: 3000, cavalry: 31500, archers: 115500 }, ratios: { infantry: 2, cavalry: 21, archers: 77 } };
-    let lastBearReport = null;
-
-    /* =========================================
-       CUSTOM HERO DROPDOWN BUILDER (./images/heroes/${heroName}.webp)
-       ========================================= */
-    const FALLBACK_USER_SVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>`;
-    const CHEVRON_SVG = `<svg class="hero-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
-    const CHECK_SVG = `<svg class="hero-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
-    const SEARCH_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>`;
-
-    function getHeroImgSrc(heroName) {
-      if (!heroName || heroName === "None") return null;
-      return `./images/heroes/${encodeURIComponent(heroName.toLowerCase().replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '-'))}.webp`;
-    }
-
-    function renderHeroAvatarHTML(heroName) {
-      const src = getHeroImgSrc(heroName);
-      if (!src) {
-        return `<span class="hero-avatar">${FALLBACK_USER_SVG}</span>`;
-      }
-      return `<span class="hero-avatar"><img src="${src}" alt="${heroName}" onerror="this.parentElement.innerHTML='${FALLBACK_USER_SVG.replace(/"/g, '&quot;')}'"></span>`;
-    }
-
-    function renderHeroDisplayLabel(heroName) {
-      return `${t(heroName.toLowerCase().replace(/\s+/g, '').replace(/[^a-zA-Z0-9]/g, '-'))}${HERO_NOTES[heroName] ? '<span class="hero-note-star"> *</span>' : ''}`;
-    }
-
-    function createHeroDropdown(containerId, inputId, heroList, defaultValue) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-
-      container.innerHTML = `
-        <div class="hero-select-wrapper" id="${inputId}-wrapper">
-          <input type="hidden" id="${inputId}" value="${defaultValue}">
-          <button type="button" class="hero-select-trigger" aria-haspopup="listbox" aria-expanded="false">
-            <span class="hero-trigger-avatar">${renderHeroAvatarHTML(defaultValue)}</span>
-            <span class="hero-trigger-name">${renderHeroDisplayLabel(defaultValue)}</span>
-            ${CHEVRON_SVG}
-          </button>
-          <div class="hero-dropdown-menu" role="listbox">
-            <div class="hero-search-box">
-              ${SEARCH_SVG}
-              <input type="text" class="hero-search-input" placeholder="${t("heroSearchPlaceholder")}" autocomplete="off">
-            </div>
-            <div class="hero-options-list"></div>
-          </div>
-        </div>
-      `;
-
-      const wrapper = container.querySelector(".hero-select-wrapper");
-      const hiddenInput = container.querySelector(`#${inputId}`);
-      const triggerBtn = container.querySelector(".hero-select-trigger");
-      const searchInput = container.querySelector(".hero-search-input");
-      const optionsList = container.querySelector(".hero-options-list");
-
-      function renderOptions(filterText = "") {
-        const q = filterText.trim().toLowerCase();
-        const filtered = heroList.filter(h => h.toLowerCase().includes(q));
-        if (!filtered.length) {
-          optionsList.innerHTML = `<div class="hero-empty-msg">${t("heroNotFound")}</div>`;
-          return;
-        }
-        optionsList.innerHTML = filtered.map(h => {
-          const isSelected = h === hiddenInput.value;
-          return `
-            <div class="hero-option-item ${isSelected ? "selected" : ""}" data-value="${h}" role="option" aria-selected="${isSelected}">
-              ${renderHeroAvatarHTML(h)}
-              <span class="hero-option-label">${renderHeroDisplayLabel(h)}</span>
-              ${isSelected ? CHECK_SVG : ""}
-            </div>
-          `;
-        }).join("");
-
-        optionsList.querySelectorAll(".hero-option-item").forEach(item => {
-          item.addEventListener("click", () => {
-            const val = item.getAttribute("data-value");
-            setHeroDropdownValue(inputId, val);
-            closeAllHeroDropdowns();
-            updateBearQuick();
-          });
-        });
-      }
-
-      triggerBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const wasOpen = wrapper.classList.contains("open");
-        closeAllHeroDropdowns();
-        if (!wasOpen) {
-          wrapper.classList.add("open");
-          triggerBtn.setAttribute("aria-expanded", "true");
-          searchInput.value = "";
-          renderOptions("");
-          setTimeout(() => searchInput.focus(), 10);
-        }
-      });
-
-      searchInput.addEventListener("click", (e) => e.stopPropagation());
-      searchInput.addEventListener("input", (e) => renderOptions(e.target.value));
-
-      renderOptions("");
-    }
-
-    function setHeroDropdownValue(inputId, val) {
-      const wrapper = document.getElementById(`${inputId}-wrapper`);
-      const hiddenInput = document.getElementById(inputId);
-      if (!wrapper || !hiddenInput) return;
-
-      hiddenInput.value = val;
-      wrapper.querySelector(".hero-trigger-avatar").innerHTML = renderHeroAvatarHTML(val);
-      wrapper.querySelector(".hero-trigger-name").innerHTML = renderHeroDisplayLabel(val);
-    }
-
-    function closeAllHeroDropdowns() {
-      document.querySelectorAll(".hero-select-wrapper.open").forEach(w => {
-        w.classList.remove("open");
-        const btn = w.querySelector(".hero-select-trigger");
-        if (btn) btn.setAttribute("aria-expanded", "false");
-      });
-    }
-
-    document.addEventListener("click", closeAllHeroDropdowns);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeAllHeroDropdowns();
-    });
-
-    function initBearCalculator() {
-      ["infTier", "cavTier", "arcTier"].forEach(id => {
-        const sel = document.getElementById(id);
-        sel.innerHTML = TIER_OPTIONS.map(opt =>
-          `<option value="${opt.value}" ${opt.value === "10-0" ? "selected" : ""}>${opt.label}</option>`
-        ).join("");
-      });
-
-      createHeroDropdown("infHeroContainer", "infHero", LEAD_LISTS.infantry, "Amadeus");
-      createHeroDropdown("cavHeroContainer", "cavHero", LEAD_LISTS.cavalry, "Petra");
-      createHeroDropdown("arcHeroContainer", "arcHero", LEAD_LISTS.archers, "Rosa");
-
-      const defaultJoiners = ["Chenko", "Chenko", "Amane", "Amane"];
-      ["joiner1", "joiner2", "joiner3", "joiner4"].forEach((id, i) => {
-        createHeroDropdown(`${id}Container`, id, JOINER_LIST, defaultJoiners[i]);
-      });
-
-      updateBearQuick();
-    }
-
-    function allocateTroops(total, ratios) {
-      const t = Math.floor(Math.max(0, total));
-      const sumR = UNITS.reduce((acc, u) => acc + Math.max(0, ratios[u]), 0);
-      const exacts = UNITS.map(u => ({ u, exact: t * (sumR > 0 ? Math.max(0, ratios[u]) / sumR : 1 / 3) }));
-      const alloc = Object.fromEntries(exacts.map(x => [x.u, Math.floor(x.exact)]));
-      let rem = t - UNITS.reduce((acc, u) => acc + alloc[u], 0);
-      exacts.sort((a, b) => (b.exact % 1) - (a.exact % 1)).forEach(x => {
-        if (rem-- > 0) alloc[x.u]++;
-      });
-      return alloc;
-    }
-
-    function calcBucketMultiplier(b) {
-      return (1 + b.attack) * (1 + b.lethality) * (1 + b.damage) * (1 + b.extra) * (1 + b.taken) / Math.max(0.05, 1 - Math.min(0.95, b.defenseDown));
-    }
-
-    function isPeriodicActive(skill, turn) {
-      const every = skill.every || 1;
-      const start = every + (skill.offset || 0);
-      return turn >= start && (turn - start) % every < (skill.duration || 1);
-    }
-
-    function getTroopPassiveMultiplier(unit, tier, tg, rng) {
-      const prob = p => (rng ? Number(rng() < p) : p);
-      let mult = 1;
-      if (unit === "archers" && tier >= 7) mult *= 1 + prob(0.10);
-      if (unit === "archers" && tg >= 3) mult *= 1 + prob(tg >= 5 ? 0.30 : 0.20) * (tg >= 8 ? 0.75 : 0.50);
-      if (unit === "cavalry" && tg >= 3) mult *= 1 + prob(tg >= 5 ? 0.15 : 0.10);
-      return mult;
-    }
-
-    function getBearSetup() {
-      const counts = {
-        infantry: Math.max(0, parseInt(document.getElementById("infCount").value) || 0),
-        cavalry: Math.max(0, parseInt(document.getElementById("cavCount").value) || 0),
-        archers: Math.max(0, parseInt(document.getElementById("arcCount").value) || 0)
-      };
-      const totalTroops = counts.infantry + counts.cavalry + counts.archers;
-      const valora = parseFloat(document.getElementById("bearValora").value) || 0;
-
-      const parseUnit = (prefix, unit) => {
-        const [tier, tg] = document.getElementById(prefix + "Tier").value.split("-").map(Number);
-        return {
-          attack: Math.max(0, parseFloat(document.getElementById(prefix + "Atk").value) || 0),
-          lethality: Math.max(0, parseFloat(document.getElementById(prefix + "Leth").value) || 0),
-          tier, tg,
-          baseAtk: BASE_ATK_TABLE[unit][`${tier}-${tg}`] || 472,
-          hero: document.getElementById(prefix + "Hero").value
-        };
-      };
-
-      const troops = {
-        infantry: parseUnit("inf", "infantry"),
-        cavalry: parseUnit("cav", "cavalry"),
-        archers: parseUnit("arc", "archers")
-      };
-
-      const joiners = ["joiner1", "joiner2", "joiner3", "joiner4"].map(id => document.getElementById(id).value);
-
-      const skillInstances = [
-        ...UNITS.map(u => ({ hero: troops[u].hero, joiner: false })),
-        ...joiners.map(h => ({ hero: h, joiner: true }))
-      ].flatMap(entry =>
-        (HERO_SKILLS_DB[entry.hero] || [])
-          .filter(s => !entry.joiner || s.slot === 1)
-          .map(s => ({ skill: s, mag: s.mag, chance: s.chance ?? 1 }))
-      );
-
-      const baseWeights = Object.fromEntries(UNITS.map(u => {
-        const tr = troops[u];
-        const statMult = (1 + tr.attack / 100) * (1 + tr.lethality / 100);
-        return [u, tr.baseAtk * statMult * (u === "archers" ? 1.1 : 1) * (1 + valora / 100)];
-      }));
-
-      return { counts, totalTroops, valora, troops, joiners, skillInstances, baseWeights };
-    }
-
-    function computeExpectedWeights(setup) {
-      const weights = { infantry: 0, cavalry: 0, archers: 0 };
-      const turns = 10;
-      for (let t = 1; t <= turns; t++) {
-        UNITS.forEach(u => {
-          const buckets = { attack: 0, lethality: 0, damage: 0, extra: 0, taken: 0, defenseDown: 0 };
-          setup.skillInstances.forEach(({ skill, mag, chance }) => {
-            if (skill.name === "Evil Eye" || (skill.units && !skill.units.includes(u))) return;
-            const activeProb = skill.every
-              ? Number(isPeriodicActive(skill, t))
-              : 1 - Math.pow(1 - chance, Math.min(t, skill.duration || 1));
-            buckets[skill.group] += mag * activeProb;
-          });
-
-          if (t > 1) {
-            const eyes = setup.skillInstances.filter(x => x.skill.name === "Evil Eye");
-            if (eyes.length) {
-              const failAll = eyes.reduce((acc, x) => acc * Math.pow(1 - x.chance, UNITS.length * Math.min(t - 1, x.skill.duration || 1)), 1);
-              buckets.taken += 0.50 * (1 - failAll);
-            }
-          }
-
-          weights[u] += setup.baseWeights[u] * calcBucketMultiplier(buckets) * getTroopPassiveMultiplier(u, setup.troops[u].tier, setup.troops[u].tg, null) / 10;
-        });
-      }
-      return weights;
-    }
-
-    function calcDamageIndex(weights, alloc) {
-      return UNITS.reduce((acc, u) => acc + weights[u] * Math.sqrt(alloc[u]), 0) / REF_NORM * 100;
-    }
-
-    function indexToPoints(idx) {
-      return (idx / 100) * REF_NORM * FORMULA_SCALE;
-    }
-
-    function updateBearQuick() {
-      const setup = getBearSetup();
-      document.getElementById("bearTotalTroops").textContent = setup.totalTroops.toLocaleString();
-
-      const activeHeroes = [...new Set([...UNITS.map(u => setup.troops[u].hero), ...setup.joiners])];
-      const notes = activeHeroes.map(h => HERO_NOTES[h]).filter(Boolean);
-      if (setup.troops.archers.tier === 11 && setup.troops.archers.tg === 8) {
-        notes.push("T11-TG8 Archers: damage estimates are provisional and may differ slightly.");
-      }
-      document.getElementById("bearHeroNote").textContent = notes.join(" ");
-
-      if (setup.totalTroops <= 0) return;
-
-      const weights = computeExpectedWeights(setup);
-      let bestRatios = { infantry: 10, cavalry: 10, archers: 80 };
-      let bestIndex = -1;
-
-      for (let rInf = 1; rInf <= 98; rInf++) {
-        for (let rCav = 1; rCav <= 99 - rInf; rCav++) {
-          const rArc = 100 - rInf - rCav;
-          const cand = { infantry: rInf, cavalry: rCav, archers: rArc };
-          const idx = calcDamageIndex(weights, allocateTroops(setup.totalTroops, cand));
-          if (idx > bestIndex) {
-            bestIndex = idx;
-            bestRatios = cand;
-          }
-        }
-      }
-
-      const bestAlloc = allocateTroops(setup.totalTroops, bestRatios);
-      const classicAlloc = allocateTroops(setup.totalTroops, { infantry: 10, cavalry: 10, archers: 80 });
-      const classicIndex = calcDamageIndex(weights, classicAlloc);
-      const gainPct = classicIndex > 0 ? ((bestIndex / classicIndex - 1) * 100).toFixed(1) : "0.0";
-
-      currentBestMix = { allocation: bestAlloc, ratios: bestRatios };
-
-      document.getElementById("bearQuickRatio").textContent = `${bestRatios.infantry} / ${bestRatios.cavalry} / ${bestRatios.archers}`;
-      document.getElementById("barRatioInf").style.width = `${bestRatios.infantry}%`;
-      document.getElementById("barRatioCav").style.width = `${bestRatios.cavalry}%`;
-      document.getElementById("barRatioArc").style.width = `${bestRatios.archers}%`;
-
-      document.getElementById("recInfCount").textContent = bestAlloc.infantry.toLocaleString();
-      document.getElementById("recCavCount").textContent = bestAlloc.cavalry.toLocaleString();
-      document.getElementById("recArcCount").textContent = bestAlloc.archers.toLocaleString();
-      document.getElementById("bearVsBaseBadge").textContent = `${Number(gainPct) >= 0 ? "+" : ""}${gainPct}% vs 10/10/80`;
-      document.getElementById("bearReportCard").style.display = "none";
-    }
-
-    function applyRecommendedToMarch() {
-      document.getElementById("infCount").value = currentBestMix.allocation.infantry;
-      document.getElementById("cavCount").value = currentBestMix.allocation.cavalry;
-      document.getElementById("arcCount").value = currentBestMix.allocation.archers;
-      updateBearQuick();
-    }
-
-    function resetBearCalc() {
-      ["infCount", "cavCount", "arcCount"].forEach(id => document.getElementById(id).value = 50000);
-      ["infAtk", "infLeth", "cavAtk", "cavLeth", "arcAtk", "arcLeth"].forEach(id => document.getElementById(id).value = 400);
-      document.getElementById("bearValora").value = "0";
-      initBearCalculator();
-    }
-
-    function generateBearReport() {
-      const setup = getBearSetup();
-      if (setup.totalTroops <= 0) return;
-
-      const runs = 1000;
-      let seed = (0x9e3779b9 ^ 685) >>> 0;
-      const rng = () => {
-        let t = Math.imul((seed = (seed + 0x6d2b79f5) >>> 0) ^ (seed >>> 15), 1 | seed);
-        return (((t ^= t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ (t >>> 14)) >>> 0) / 0x100000000;
-      };
-
-      const simWeights = [];
-      for (let r = 0; r < runs; r++) {
-        const w = { infantry: 0, cavalry: 0, archers: 0 };
-        const activeUntil = setup.skillInstances.map(() => 0);
-        let curse = 0;
-
-        for (let turn = 1; turn <= 10; turn++) {
-          const activeFlags = setup.skillInstances.map(({ skill, chance }, idx) => {
-            if (skill.name === "Evil Eye" || skill.name === "The Favor") return false;
-            if (skill.every) return isPeriodicActive(skill, turn);
-            if (chance >= 1 || rng() < chance) activeUntil[idx] = turn + (skill.duration || 1);
-            return activeUntil[idx] > turn;
-          });
-
-          UNITS.forEach(u => {
-            const buckets = { attack: 0, lethality: 0, damage: 0, extra: 0, taken: 0, defenseDown: 0 };
-            setup.skillInstances.forEach(({ skill, mag }, idx) => {
-              if (activeFlags[idx] && (!skill.units || skill.units.includes(u))) {
-                buckets[skill.group] += mag;
-              }
-            });
-            setup.skillInstances.filter(x => x.skill.name === "The Favor").forEach(x => {
-              if (rng() < x.chance) buckets[x.skill.group] += x.mag;
-            });
-            buckets.taken += curse;
-            w[u] += setup.baseWeights[u] * calcBucketMultiplier(buckets) * getTroopPassiveMultiplier(u, setup.troops[u].tier, setup.troops[u].tg, rng) / 10;
-          });
-
-          curse = 0;
-          setup.skillInstances.filter(x => x.skill.name === "Evil Eye").forEach(x => {
-            UNITS.forEach(() => {
-              if (rng() < x.chance) curse = Math.max(curse, x.mag);
-            });
-          });
-        }
-        simWeights.push(w);
-      }
-
-      const summarize = alloc => {
-        const samples = simWeights.map(w => indexToPoints(calcDamageIndex(w, alloc)));
-        const sorted = [...samples].sort((a, b) => a - b);
-        const pct = q => {
-          const pos = (sorted.length - 1) * q;
-          const lo = Math.floor(pos), hi = Math.ceil(pos);
-          return sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
-        };
-        return {
-          mean: samples.reduce((a, b) => a + b, 0) / samples.length,
-          p10: pct(0.1),
-          p90: pct(0.9),
-          samples
-        };
-      };
-
-      const classicAlloc = allocateTroops(setup.totalTroops, { infantry: 10, cavalry: 10, archers: 80 });
-      const plans = [
-        { key: "bearMarchRec", alloc: currentBestMix.allocation, color: "#10b981" },
-        { key: "bearMarchYours", alloc: setup.counts, color: "#3b82f6" },
-        { key: "bearMarchBase", alloc: classicAlloc, color: "#94a3b8" }
-      ];
-
-      lastBearReport = plans.map(p => ({ ...p, ...summarize(p.alloc) }));
-      renderBearReport(lastBearReport);
-      document.getElementById("bearReportCard").style.display = "block";
-    }
-
-    function formatBearDmg(num) {
-      if (Math.abs(num) >= 1e6) return (num / 1e6).toFixed(2) + "M";
-      if (Math.abs(num) >= 1e3) return (num / 1e3).toFixed(1) + "K";
-      return Math.round(num).toLocaleString();
-    }
-
-    function renderBearReport(rows) {
-      const maxVal = Math.max(...rows.map(r => r.p90), 1);
-      document.getElementById("bearBarsContainer").innerHTML = rows.map(r => `
-        <div style="margin-bottom:10px;">
-          <div style="display:flex; justify-content:space-between; font-size:0.88rem;">
-            <strong>${t(r.key)}</strong>
-            <span>${formatBearDmg(r.mean)} <span style="color:var(--text-muted); font-size:0.8rem;">(P10: ${formatBearDmg(r.p10)} – P90: ${formatBearDmg(r.p90)})</span></span>
-          </div>
-          <div class="bear-bar-track"><div class="bear-bar-fill" style="width:${(r.mean / maxVal * 100).toFixed(1)}%; background:${r.color};"></div></div>
-        </div>
-      `).join("");
-
-      document.getElementById("bearCompareTbody").innerHTML = rows.map(r => `
-        <tr>
-          <td><strong>${t(r.key)}</strong></td>
-          <td>${r.alloc.infantry.toLocaleString()} / ${r.alloc.cavalry.toLocaleString()} / ${r.alloc.archers.toLocaleString()}</td>
-          <td><strong>${formatBearDmg(r.mean)}</strong></td>
-          <td>${formatBearDmg(r.p10)} – ${formatBearDmg(r.p90)}</td>
-        </tr>
-      `).join("");
-    }
-
-    function downloadBlob(content, filename, type) {
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(new Blob([content], { type }));
-      a.download = filename;
-      a.click();
-    }
-
-    function exportBearJSON() {
-      if (!lastBearReport) return;
-      const clean = lastBearReport.map(({ samples, ...rest }) => rest);
-      downloadBlob(JSON.stringify({ recommended: currentBestMix, comparison: clean }, null, 2), "bear-hunt-report.json", "application/json");
-    }
-
-    function exportBearCSV() {
-      if (!lastBearReport) return;
-      let csv = "sample,recommended_damage_points,current_damage_points,classic_10_10_80_points\n";
-      for (let i = 0; i < lastBearReport[0].samples.length; i++) {
-        csv += `${i + 1},${lastBearReport[0].samples[i].toFixed(1)},${lastBearReport[1].samples[i].toFixed(1)},${lastBearReport[2].samples[i].toFixed(1)}\n`;
-      }
-      downloadBlob(csv, "bear-hunt-samples.csv", "text/csv;charset=utf-8");
-    }
-
-    function exportBearPNG() {
-      if (!lastBearReport) return;
-      const canvas = document.createElement("canvas");
-      canvas.width = 760; canvas.height = 380;
-      const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#181b22"; ctx.fillRect(0, 0, 760, 380);
-      ctx.fillStyle = "#10b981"; ctx.fillRect(0, 0, 760, 8);
-      ctx.fillStyle = "#ffffff"; ctx.font = "bold 22px sans-serif";
-      const r = currentBestMix.ratios, a = currentBestMix.allocation;
-      ctx.fillText(`Kingshot Bear Ratio: ${r.infantry} / ${r.cavalry} / ${r.archers}`, 30, 52);
-      ctx.font = "16px sans-serif"; ctx.fillStyle = "#94a3b8";
-      ctx.fillText(`Recommended Troops: Inf ${a.infantry.toLocaleString()} | Cav ${a.cavalry.toLocaleString()} | Arc ${a.archers.toLocaleString()}`, 30, 84);
-      lastBearReport.forEach((row, idx) => {
-        const y = 145 + idx * 68;
-        ctx.fillStyle = row.color; ctx.font = "bold 16px sans-serif";
-        ctx.fillText(`${t(row.key)}: Avg ${formatBearDmg(row.mean)}  (P10: ${formatBearDmg(row.p10)} - P90: ${formatBearDmg(row.p90)})`, 30, y);
-      });
-      const link = document.createElement("a");
-      link.href = canvas.toDataURL("image/png");
-      link.download = "bear-hunt-report.png";
-      link.click();
-    }
-
-    // Initialize the bear calculator when the page loads
-    initBearCalculator();
   </script>
+
+  <!-- External Bear Ratio Calculator Engine & Hero Dropdowns -->
+  <script src="./js/bear-calc.js"></script>
 </body>
 </html>
