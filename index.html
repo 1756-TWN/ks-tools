@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Kingshot Tools | Hot×Gie"/>
-  <meta property="og:description" content="Leading Kingdoms Checker & Alliance Batch Redeem"/>
+  <meta property="og:description" content="Leading Kingdoms Checker, Alliance Batch Redeem, Bear & Mystic Trials Calculator"/>
   <meta property="og:url" content="https://ks-transfer-ranking.github.io/kingdom-ranker/"/>
   <meta property="og:image" content="/kingdom-ranker/og-image.jpeg"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/kingdom-ranker/apple-touch-icon.png">
@@ -47,9 +47,9 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      max-width: 960px;
+      max-width: 1020px;
       margin: 32px auto;
-      padding: 0 20px;
+      padding: 0 20px 40px;
       line-height: 1.5;
     }
 
@@ -92,6 +92,7 @@
     /* Tab Navigation */
     .tab-nav {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 24px;
       background-color: var(--card-bg);
@@ -101,20 +102,20 @@
     }
 
     .tab-btn {
-      flex: 1;
+      flex: 1 1 180px;
       background-color: transparent;
       color: var(--text-muted);
       border: none;
-      padding: 10px 16px;
+      padding: 10px 14px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 0.98rem;
+      font-size: 0.94rem;
       font-weight: 600;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       width: auto;
     }
 
@@ -500,9 +501,7 @@
       margin-bottom: 12px;
     }
 
-    /* =========================================
-       CUSTOM HERO DROPDOWN WITH PORTRAITS
-       ========================================= */
+    /* CUSTOM HERO DROPDOWN */
     .hero-select-wrapper {
       position: relative;
       width: 100%;
@@ -799,8 +798,214 @@
       line-height: 1.5;
     }
 
+    /* =========================================
+       TAB 4: MYSTIC TRIALS CALCULATOR STYLES
+       ========================================= */
+    .mt-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .mt-accordion {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .mt-acc-header {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: var(--text-color);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color 0.15s;
+    }
+
+    .mt-acc-header:hover {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .mt-step-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: var(--accent-color);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mt-acc-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mt-acc-title {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .mt-acc-desc {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .mt-acc-chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.2s;
+    }
+
+    .mt-accordion.open .mt-acc-chevron {
+      transform: rotate(180deg);
+    }
+
+    .mt-acc-body {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .mt-accordion.open .mt-acc-body {
+      display: block;
+    }
+
+    .mt-total-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+
+    .mt-troops-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .mt-unit-card {
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 9px;
+      padding: 10px;
+    }
+
+    .mt-unit-card.inf { border-top: 2px solid #f43f5e; }
+    .mt-unit-card.cav { border-top: 2px solid #0ea5e9; }
+    .mt-unit-card.arc { border-top: 2px solid #10b981; }
+
+    .mt-unit-head {
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .mt-field {
+      margin-bottom: 7px;
+    }
+
+    .mt-field label {
+      font-size: 0.68rem;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mt-field input, .mt-field select {
+      padding: 5px 6px;
+      font-size: 0.82rem;
+      border-radius: 6px;
+    }
+
+    .mt-stats-2x2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+
+    .mt-settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .mt-summary-box {
+      margin-top: 12px;
+      background-color: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .mt-summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .mt-heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+    }
+
+    .mt-legend-bar {
+      flex: 1;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgb(148,163,184) 0%, rgb(251,191,36) 35%, rgb(16,185,129) 70%, rgb(5,150,105) 100%);
+    }
+
+    .mt-top5-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .mt-top5-item:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 860px) {
+      .mt-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 720px) {
-      .bear-troop-grid, .bear-joiner-grid, .rec-counts-grid {
+      .bear-troop-grid, .bear-joiner-grid, .rec-counts-grid, .mt-troops-3col {
         grid-template-columns: 1fr;
       }
       th, td {
@@ -828,6 +1033,7 @@
     <button id="tabBtn-ranker" class="tab-btn active" onclick="switchTab('ranker', this)">🏰 王國戰力排行</button>
     <button id="tabBtn-redeem" class="tab-btn" onclick="switchTab('redeem', this)">🎁 聯盟批量兌換</button>
     <button id="tabBtn-bear" class="tab-btn" onclick="switchTab('bear', this)">🐻 打熊比例計算</button>
+    <button id="tabBtn-mystic" class="tab-btn" onclick="switchTab('mystic', this)">🔮 秘境試煉模擬器</button>
   </nav>
 
   <!-- TAB 1: Kingdom Ranking Checker -->
@@ -918,7 +1124,7 @@
     </div>
   </div>
 
-  <!-- TAB 3: Bear Ratio Calculator (KingshotGuide Exact Engine + Hero Portraits) -->
+  <!-- TAB 3: Bear Ratio Calculator -->
   <div id="tab-bear" class="tab-content">
     <h1 data-i18n="bearTitle">🐻 狩獵巨熊配兵計算機</h1>
     <p class="page-subtitle" data-i18n="bearSubtitle">精準傷害模型與英雄技能乘區演算法 (多分桶技能引擎與蒙地卡羅模擬) — 仍在測試中，暫不建議使用</p>
@@ -1189,6 +1395,165 @@
     </div>
   </div>
 
+  <!-- TAB 4: Mystic Trials Calculator -->
+  <div id="tab-mystic" class="tab-content">
+    <h1 data-i18n="mtTitle">🔮 秘境試煉模擬器</h1>
+    <p class="page-subtitle" data-i18n="mtSubtitle">輸入戰報雙方兵種屬性，透過多執行緒網格模擬尋找最高勝率配兵比例</p>
+
+    <div class="mt-layout">
+      <!-- Left Column: 3 Accordion Steps -->
+      <div>
+        <!-- Step 1: Your stats -->
+        <div id="mt-acc-self" class="mt-accordion open">
+          <button type="button" class="mt-acc-header" onclick="toggleMtAccordion('self')">
+            <span class="mt-step-badge">1</span>
+            <span class="mt-acc-meta">
+              <span class="mt-acc-title" data-i18n="mtStep1Title">我方屬性 (Your stats)</span>
+              <span class="mt-acc-desc" data-i18n="mtStep1Desc">從戰報中複製我方兵力與四維百分比</span>
+            </span>
+            <svg class="mt-acc-chevron" viewBox="0 0 20 20"><path fill="currentColor" d="M5.5 7.5 10 12l4.5-4.5 1.4 1.4L10 14.8 4.1 8.9z"/></svg>
+          </button>
+          <div class="mt-acc-body" id="mt-body-self"></div>
+        </div>
+
+        <!-- Step 2: Opponent stats -->
+        <div id="mt-acc-foe" class="mt-accordion">
+          <button type="button" class="mt-acc-header" onclick="toggleMtAccordion('foe')">
+            <span class="mt-step-badge">2</span>
+            <span class="mt-acc-meta">
+              <span class="mt-acc-title" data-i18n="mtStep2Title">敵方屬性 (Opponent stats)</span>
+              <span class="mt-acc-desc" data-i18n="mtStep2Desc">輸入試煉守軍兵力與屬性加成</span>
+            </span>
+            <svg class="mt-acc-chevron" viewBox="0 0 20 20"><path fill="currentColor" d="M5.5 7.5 10 12l4.5-4.5 1.4 1.4L10 14.8 4.1 8.9z"/></svg>
+          </button>
+          <div class="mt-acc-body" id="mt-body-foe"></div>
+        </div>
+
+        <!-- Step 3: Simulation settings -->
+        <div id="mt-acc-settings" class="mt-accordion">
+          <button type="button" class="mt-acc-header" onclick="toggleMtAccordion('settings')">
+            <span class="mt-step-badge">3</span>
+            <span class="mt-acc-meta">
+              <span class="mt-acc-title" data-i18n="mtStep3Title">模擬參數設定 (Simulation settings)</span>
+              <span class="mt-acc-desc" data-i18n="mtStep3Desc">採樣網格密度、單點戰鬥場數與試煉場地</span>
+            </span>
+            <svg class="mt-acc-chevron" viewBox="0 0 20 20"><path fill="currentColor" d="M5.5 7.5 10 12l4.5-4.5 1.4 1.4L10 14.8 4.1 8.9z"/></svg>
+          </button>
+          <div class="mt-acc-body">
+            <div class="mt-settings-grid">
+              <div class="mt-field">
+                <label data-i18n="mtBattlesPerPt">單點模擬次數 (10–1000)</label>
+                <input type="number" id="mtBattles" value="100" min="10" max="1000" step="10" oninput="updateMtGridInfo()">
+              </div>
+              <div class="mt-field">
+                <label data-i18n="mtSparsity">採樣步長 (Sparsity)</label>
+                <select id="mtStep" onchange="updateMtGridInfo()">
+                  <option value="0.1">0.10 (10%)</option>
+                  <option value="0.05">0.05 (5%)</option>
+                  <option value="0.04">0.04 (4%)</option>
+                  <option value="0.02" selected>0.02 (2%)</option>
+                </select>
+              </div>
+              <div class="mt-field">
+                <label data-i18n="mtMinInf">最低步兵比例 (0–1)</label>
+                <input type="number" id="mtMinInf" value="0.3" min="0" max="1" step="0.05" oninput="updateMtGridInfo()">
+              </div>
+              <div class="mt-field">
+                <label data-i18n="mtMaxInf">最高步兵比例 (0–1)</label>
+                <input type="number" id="mtMaxInf" value="0.7" min="0" max="1" step="0.05" oninput="updateMtGridInfo()">
+              </div>
+              <div class="mt-field">
+                <label data-i18n="mtMinCav">最低騎兵比例 (0–1)</label>
+                <input type="number" id="mtMinCav" value="0" min="0" max="1" step="0.05" oninput="updateMtGridInfo()">
+              </div>
+              <div class="mt-field">
+                <label data-i18n="mtMaxCav">最高騎兵比例 (0–1)</label>
+                <input type="number" id="mtMaxCav" value="0.3" min="0" max="1" step="0.05" oninput="updateMtGridInfo()">
+              </div>
+              <div class="mt-field" style="grid-column: span 2;">
+                <label data-i18n="mtTrialSelect">秘境試煉場地</label>
+                <select id="mtTrial">
+                  <option value="Forest of Life" data-i18n="mtTrial1">生命森林</option>
+                  <option value="Crystal Cave" data-i18n="mtTrial2">水晶礦洞</option>
+                  <option value="Knowledge Nexus" data-i18n="mtTrial3">知識樞紐</option>
+                  <option value="Molten Fort" data-i18n="mtTrial4">熔岩要塞</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mt-summary-box">
+              <div class="mt-summary-line">
+                <span data-i18n="mtGridPointsLabel">網格採樣點數：</span>
+                <strong id="mtGridCells" style="color:var(--text-color);">0</strong>
+              </div>
+              <div class="mt-summary-line">
+                <span data-i18n="mtTotalBattlesLabel">總模擬戰鬥場次：</span>
+                <strong id="mtTotalBattles" style="color:var(--text-color);">0</strong>
+              </div>
+              <p id="mtCapWarning" style="margin:6px 0 0; font-size:0.76rem;"></p>
+            </div>
+          </div>
+        </div>
+
+        <button id="mtRunBtn" class="btn-primary" onclick="runMysticSimulation()" data-i18n="mtRunBtn">🚀 開始計算最佳配兵</button>
+      </div>
+
+      <!-- Right Column: Results, Heatmap & Top 5 -->
+      <div>
+        <!-- Best Composition Card -->
+        <div class="card" style="margin-bottom: 18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div>
+              <h2 style="margin-bottom:2px;" data-i18n="mtBestTitle">🏆 最佳配兵比例 (Best composition)</h2>
+              <p style="margin:0; font-size:0.8rem; color:var(--text-muted);" data-i18n="mtBestSubtitle">所有採樣比例中勝率最高的陣容 (步 / 騎 / 弓)</p>
+            </div>
+            <button id="mtCopyBtn" class="btn-secondary" style="display:none; padding:5px 12px; font-size:0.8rem;" onclick="copyMtBest()" data-i18n="mtCopyBtn">複製比例</button>
+          </div>
+
+          <div id="mtBestContent" style="margin-top:16px;">
+            <p style="font-size:0.9rem; color:var(--text-muted); margin:0;" data-i18n="mtIdleHint">設定雙方屬性後，點擊「開始計算最佳配兵」運行模擬。</p>
+          </div>
+
+          <div id="mtProgressWrap" style="display:none; margin-top:14px;">
+            <div class="bear-bar-track" style="height:8px; margin-bottom:6px;">
+              <div id="mtProgressBar" class="bear-bar-fill" style="width:0%; background:var(--accent-color);"></div>
+            </div>
+            <span id="mtProgressText" style="font-size:0.78rem; color:var(--text-muted);">0 / 0</span>
+          </div>
+
+          <div id="mtErrorBox" style="display:none; margin-top:12px; padding:10px 12px; border-radius:8px; background:var(--error-bg); color:#fca5a5; font-size:0.85rem;"></div>
+        </div>
+
+        <!-- Win Chance Heatmap Card -->
+        <div class="card" style="margin-bottom: 18px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h2 style="margin:0;" data-i18n="mtHeatmapTitle">🗺️ 勝率分佈熱力圖 (Win chance heatmap)</h2>
+            <span id="mtInspectedBadge" style="font-size:0.82rem; font-weight:700; color:#4ade80;"></span>
+          </div>
+
+          <div id="mtHeatmapContainer">
+            <div style="height:160px; border:1px dashed var(--border-color); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.88rem;" data-i18n="mtNoResults">尚無模擬結果</div>
+          </div>
+
+          <div id="mtHeatmapFooter" style="display:none;">
+            <div class="mt-heatmap-legend">
+              <span>0%</span>
+              <div class="mt-legend-bar"></div>
+              <span>100%</span>
+            </div>
+            <p style="margin:8px 0 0; font-size:0.76rem; color:var(--text-muted);" data-i18n="mtHeatmapHint">橫軸由左至右代表步兵比例增加；縱軸由上至下代表騎兵比例增加，剩餘比例為弓兵。點擊任意方格可查看詳細勝率。</p>
+          </div>
+        </div>
+
+        <!-- Top 5 Ratios Card -->
+        <div id="mtTop5Card" class="card" style="display:none; margin-bottom:0;">
+          <h2 style="margin-bottom:8px;" data-i18n="mtTop5Title">🔥 前 5 名高勝率比例 (Top 5 ratios)</h2>
+          <div id="mtTop5List"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* =========================================
        I18N (CHINESE DEFAULT & ENGLISH)
@@ -1204,6 +1569,7 @@
         tabRanker: "🏰 王國戰力排行",
         tabRedeem: "🎁 聯盟批量兌換",
         tabBear: "🐻 打熊比例計算",
+        tabMystic: "🔮 秘境試煉模擬器",
         rankerTitle: "🏰 王國移民戰力查詢",
         rankerSubtitle: "查詢各移民組別中的領先王國排名",
         labelRange: "王國組別範圍：",
@@ -1301,6 +1667,53 @@
         levelOptionNone: "無 (0%)",
         levelOption: (lv, pct) => `等級${lv} (${pct}%)`,
 
+        // Mystic Trials Translations
+        mtTitle: "🔮 秘境試煉模擬器",
+        mtSubtitle: "輸入戰報雙方兵種屬性，透過多執行緒網格模擬尋找最高勝率配兵比例",
+        mtStep1Title: "我方屬性 (Your stats)",
+        mtStep1Desc: "從戰報中複製我方兵力與四維百分比",
+        mtStep2Title: "敵方屬性 (Opponent stats)",
+        mtStep2Desc: "輸入試煉守軍兵力與屬性加成",
+        mtStep3Title: "模擬參數設定 (Simulation settings)",
+        mtStep3Desc: "採樣網格密度、單點戰鬥場數與試煉場地",
+        mtTotalTroops: "總出兵量",
+        mtInfLabel: "🛡️ 步兵 INF",
+        mtCavLabel: "🐎 騎兵 CAV",
+        mtArcLabel: "🏹 弓兵 ARC",
+        mtTroops: "兵力數量",
+        mtAttack: "攻擊 %",
+        mtDefense: "防禦 %",
+        mtLethality: "殺傷 %",
+        mtHealth: "生命 %",
+        mtTier: "兵種階級",
+        mtBattlesPerPt: "單點模擬次數 (10–1000)",
+        mtSparsity: "採樣步長 (Sparsity)",
+        mtMinInf: "最低步兵比例 (0–1)",
+        mtMaxInf: "最高步兵比例 (0–1)",
+        mtMinCav: "最低騎兵比例 (0–1)",
+        mtMaxCav: "最高騎兵比例 (0–1)",
+        mtTrialSelect: "秘境試煉場地",
+        mtTrial1: "生命森林",
+        mtTrial2: "水晶礦洞",
+        mtTrial3: "知識樞紐",
+        mtTrial4: "熔岩要塞",
+        mtGridPointsLabel: "網格採樣點數：",
+        mtTotalBattlesLabel: "總模擬戰鬥場次：",
+        mtCapNormal: "每個採樣點都會執行完整回合制戰鬥模擬，場數越高越精準。",
+        mtCapExceeded: "超過單次 50,000 場模擬上限，請調低單點模擬次數或調大步長。",
+        mtRunBtn: "🚀 開始計算最佳配兵",
+        mtRunningBtn: "⏳ 正在模擬計算中...",
+        mtBestTitle: "🏆 最佳配兵比例 (Best composition)",
+        mtBestSubtitle: "所有採樣比例中勝率最高的陣容 (步 / 騎 / 弓)",
+        mtCopyBtn: "複製比例",
+        mtCopiedBtn: "已複製！",
+        mtIdleHint: "設定雙方屬性後，點擊「開始計算最佳配兵」運行模擬。",
+        mtComputingHint: "正在進行多執行緒戰鬥模擬，請稍候...",
+        mtHeatmapTitle: "🗺️ 勝率分佈熱力圖 (Win chance heatmap)",
+        mtNoResults: "尚無模擬結果",
+        mtHeatmapHint: "橫軸由左至右代表步兵比例增加；縱軸由上至下代表騎兵比例增加，剩餘比例為弓兵。點擊任意方格可查看詳細勝率。",
+        mtTop5Title: "🔥 前 5 名高勝率比例 (Top 5 ratios)",
+
         alcar: "阿爾卡",
         amadeus: "阿瑪迪斯",
         amane: "雨音",
@@ -1341,6 +1754,7 @@
         tabRanker: "🏰 Kingdom Ranker",
         tabRedeem: "🎁 Alliance Batch Redeem",
         tabBear: "🐻 Bear Ratio Calculator",
+        tabMystic: "🔮 Mystic Trials Calculator",
         rankerTitle: "🏰 Kingdom Ranking Checker",
         rankerSubtitle: "Finding the leading kingdoms in each transfer group.",
         labelRange: "Kingdom Range:",
@@ -1437,6 +1851,53 @@
         bearTroopsAtkUpTitle: "Troops Attack Up",
         levelOptionNone: "None (0%)",
         levelOption: (lv, pct) => `Lv. ${lv} (${pct}%)`,
+
+        // Mystic Trials Translations
+        mtTitle: "🔮 Mystic Trials Calculator",
+        mtSubtitle: "Copy stats from your battle report to simulate and find the highest win-rate troop ratio.",
+        mtStep1Title: "Your stats",
+        mtStep1Desc: "Copy them from your battle report",
+        mtStep2Title: "Opponent stats",
+        mtStep2Desc: "Trial enemy troops and percentages",
+        mtStep3Title: "Simulation settings",
+        mtStep3Desc: "Sampling grid and battles per point",
+        mtTotalTroops: "Total troops",
+        mtInfLabel: "🛡️ INF Infantry",
+        mtCavLabel: "🐎 CAV Cavalry",
+        mtArcLabel: "🏹 ARC Archery",
+        mtTroops: "Troops",
+        mtAttack: "ATT %",
+        mtDefense: "DEF %",
+        mtLethality: "LET %",
+        mtHealth: "HP %",
+        mtTier: "Tier",
+        mtBattlesPerPt: "Battles per point (10–1000)",
+        mtSparsity: "Sparsity (step)",
+        mtMinInf: "Min infantry (0–1)",
+        mtMaxInf: "Max infantry (0–1)",
+        mtMinCav: "Min cavalry (0–1)",
+        mtMaxCav: "Max cavalry (0–1)",
+        mtTrialSelect: "Mystic trial",
+        mtTrial1: "Forest of Life",
+        mtTrial2: "Crystal Cave",
+        mtTrial3: "Knowledge Nexus",
+        mtTrial4: "Molten Fort",
+        mtGridPointsLabel: "Grid points:",
+        mtTotalBattlesLabel: "Total simulated battles:",
+        mtCapNormal: "Each point runs this many full battles. Higher is more accurate and slower.",
+        mtCapExceeded: "Reduce battles or raise the step: the cap is 50,000 battles per run.",
+        mtRunBtn: "🚀 Run simulation",
+        mtRunningBtn: "⏳ Running…",
+        mtBestTitle: "🏆 Best composition",
+        mtBestSubtitle: "Highest win chance across every sampled ratio (Inf / Cav / Arc)",
+        mtCopyBtn: "Copy",
+        mtCopiedBtn: "Copied!",
+        mtIdleHint: "Set your stats, then run the simulation to see the winning ratio.",
+        mtComputingHint: "Running simulations…",
+        mtHeatmapTitle: "🗺️ Win chance heatmap",
+        mtNoResults: "No results yet",
+        mtHeatmapHint: "Columns run left→right as infantry grows; rows run top→bottom as cavalry grows. The rest of each split is archery. Tap a cell to read its exact values.",
+        mtTop5Title: "🔥 Top 5 ratios",
         
         alcar: "Alcar",
         amadeus: "Amadeus",
@@ -1488,15 +1949,20 @@
       document.getElementById("tabBtn-ranker").textContent = t("tabRanker");
       document.getElementById("tabBtn-redeem").textContent = t("tabRedeem");
       document.getElementById("tabBtn-bear").textContent = t("tabBear");
+      document.getElementById("tabBtn-mystic").textContent = t("tabMystic");
 
       document.querySelectorAll("[data-i18n]").forEach(el => {
         const key = el.getAttribute("data-i18n");
-        el.textContent = t(key);
+        if (i18n[currentLang][key]) {
+          el.textContent = t(key);
+        }
       });
 
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
-        el.placeholder = t(key);
+        if (i18n[currentLang][key]) {
+          el.placeholder = t(key);
+        }
       });
 
       document.querySelectorAll("#range option").forEach(opt => {
@@ -1553,6 +2019,9 @@
 
       if (typeof updateBearLanguage === "function") {
         updateBearLanguage();
+      }
+      if (typeof refreshMysticTrialsUI === "function") {
+        refreshMysticTrialsUI();
       }
     }
 
@@ -1911,6 +2380,435 @@
         setControlsDisabled(false);
       }
     }
+
+    /* =========================================
+       TAB 4: MYSTIC TRIALS CALCULATOR LOGIC
+       ========================================= */
+    const mtState = {
+      self: {
+        inf: { troops: 50000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" },
+        cav: { troops: 50000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" },
+        arc: { troops: 50000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" }
+      },
+      foe: {
+        inf: { troops: 60000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" },
+        cav: { troops: 45000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" },
+        arc: { troops: 45000, attack: 200, defense: 200, lethality: 200, health: 200, tier: "t10" }
+      },
+      results: null,
+      inspected: null,
+      isRunning: false,
+      worker: null,
+      runId: 0
+    };
+
+    function toggleMtAccordion(section) {
+      const target = document.getElementById("mt-acc-" + section);
+      const isOpen = target.classList.contains("open");
+      ["self", "foe", "settings"].forEach(s => {
+        document.getElementById("mt-acc-" + s).classList.remove("open");
+      });
+      if (!isOpen) {
+        target.classList.add("open");
+      }
+    }
+
+    function renderMtArmyForm(side) {
+      const container = document.getElementById("mt-body-" + side);
+      const data = mtState[side];
+      const total = data.inf.troops + data.cav.troops + data.arc.troops;
+
+      const units = [
+        { key: "inf", labelKey: "mtInfLabel", cls: "inf" },
+        { key: "cav", labelKey: "mtCavLabel", cls: "cav" },
+        { key: "arc", labelKey: "mtArcLabel", cls: "arc" }
+      ];
+
+      const statFields = [
+        { key: "attack", labelKey: "mtAttack" },
+        { key: "defense", labelKey: "mtDefense" },
+        { key: "lethality", labelKey: "mtLethality" },
+        { key: "health", labelKey: "mtHealth" }
+      ];
+
+      container.innerHTML = `
+        <div class="mt-total-banner">
+          <span style="color:var(--text-muted); font-weight:600;">${t("mtTotalTroops")}</span>
+          <strong id="mt-total-${side}">${total.toLocaleString()}</strong>
+        </div>
+        <div class="mt-troops-3col">
+          ${units.map(u => `
+            <div class="mt-unit-card ${u.cls}">
+              <div class="mt-unit-head">${t(u.labelKey)}</div>
+              <div class="mt-field">
+                <label>${t("mtTroops")}</label>
+                <input type="number" min="0" step="1000" value="${data[u.key].troops}"
+                  oninput="updateMtStat('${side}', '${u.key}', 'troops', this.value)">
+              </div>
+              <div class="mt-stats-2x2">
+                ${statFields.map(sf => `
+                  <div class="mt-field" style="margin-bottom:0;">
+                    <label>${t(sf.labelKey)}</label>
+                    <input type="number" min="0" step="5" value="${data[u.key][sf.key]}"
+                      oninput="updateMtStat('${side}', '${u.key}', '${sf.key}', this.value)">
+                  </div>
+                `).join("")}
+              </div>
+              <div class="mt-field" style="margin-bottom:0;">
+                <label>${t("mtTier")}</label>
+                <select onchange="updateMtStat('${side}', '${u.key}', 'tier', this.value)">
+                  <option value="t10" ${data[u.key].tier === "t10" ? "selected" : ""}>T10</option>
+                  <option value="t11" ${data[u.key].tier === "t11" ? "selected" : ""}>T11</option>
+                </select>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function updateMtStat(side, unit, prop, val) {
+      if (prop === "tier") {
+        mtState[side][unit].tier = val;
+      } else {
+        mtState[side][unit][prop] = Math.max(0, Number(val) || 0);
+        if (prop === "troops") {
+          const d = mtState[side];
+          const total = d.inf.troops + d.cav.troops + d.arc.troops;
+          const totalEl = document.getElementById("mt-total-" + side);
+          if (totalEl) totalEl.textContent = total.toLocaleString();
+        }
+      }
+    }
+
+    function getMtGridParams() {
+      const battles = Math.min(1000, Math.max(10, Number(document.getElementById("mtBattles").value) || 100));
+      const step = Number(document.getElementById("mtStep").value) || 0.02;
+      const minInf = Math.min(1, Math.max(0, Number(document.getElementById("mtMinInf").value) || 0));
+      const maxInf = Math.min(1, Math.max(0, Number(document.getElementById("mtMaxInf").value) || 0));
+      const minCav = Math.min(1, Math.max(0, Number(document.getElementById("mtMinCav").value) || 0));
+      const maxCav = Math.min(1, Math.max(0, Number(document.getElementById("mtMaxCav").value) || 0));
+
+      let cells = 0;
+      for (let inf = minInf; inf <= maxInf + 1e-9; inf = parseFloat((inf + step).toFixed(6))) {
+        const capCav = Math.min(1 - inf, maxCav);
+        for (let cav = minCav; cav <= capCav + 1e-9; cav = parseFloat((cav + step).toFixed(6))) {
+          cells += 1;
+        }
+      }
+      const totalBattles = cells * battles;
+      return { battles, step, minInf, maxInf, minCav, maxCav, cells, totalBattles, overCap: totalBattles > 50000 };
+    }
+
+    function updateMtGridInfo() {
+      const p = getMtGridParams();
+      document.getElementById("mtGridCells").textContent = p.cells;
+      const totalEl = document.getElementById("mtTotalBattles");
+      totalEl.textContent = p.totalBattles.toLocaleString();
+      totalEl.style.color = p.overCap ? "#f87171" : "var(--text-color)";
+
+      const warnEl = document.getElementById("mtCapWarning");
+      warnEl.textContent = p.overCap ? t("mtCapExceeded") : t("mtCapNormal");
+      warnEl.style.color = p.overCap ? "#f87171" : "var(--text-muted)";
+
+      const runBtn = document.getElementById("mtRunBtn");
+      runBtn.disabled = p.overCap || p.cells === 0 || mtState.isRunning;
+    }
+
+    function serializeMtPlayer(sideData) {
+      return {
+        initTroops: [sideData.inf.troops, sideData.cav.troops, sideData.arc.troops],
+        infAttack: sideData.inf.attack,
+        infDefense: sideData.inf.defense,
+        infLethality: sideData.inf.lethality,
+        infHealth: sideData.inf.health,
+        cavAttack: sideData.cav.attack,
+        cavDefense: sideData.cav.defense,
+        cavLethality: sideData.cav.lethality,
+        cavHealth: sideData.cav.health,
+        arcAttack: sideData.arc.attack,
+        arcDefense: sideData.arc.defense,
+        arcLethality: sideData.arc.lethality,
+        arcHealth: sideData.arc.health,
+        infTier: sideData.inf.tier,
+        cavTier: sideData.cav.tier,
+        arcTier: sideData.arc.tier
+      };
+    }
+
+    function runMysticSimulation() {
+      const p = getMtGridParams();
+      if (p.overCap || p.cells === 0) return;
+
+      if (mtState.worker) {
+        mtState.worker.terminate();
+      }
+
+      const currentRun = ++mtState.runId;
+      mtState.isRunning = true;
+      mtState.results = null;
+      mtState.inspected = null;
+
+      const runBtn = document.getElementById("mtRunBtn");
+      runBtn.disabled = true;
+      runBtn.textContent = t("mtRunningBtn");
+
+      document.getElementById("mtCopyBtn").style.display = "none";
+      document.getElementById("mtErrorBox").style.display = "none";
+      document.getElementById("mtTop5Card").style.display = "none";
+      document.getElementById("mtHeatmapFooter").style.display = "none";
+      document.getElementById("mtInspectedBadge").textContent = "";
+
+      document.getElementById("mtBestContent").innerHTML = `<p style="font-size:0.9rem; color:var(--text-muted); margin:0;">${t("mtComputingHint")}</p>`;
+      document.getElementById("mtHeatmapContainer").innerHTML = `<div style="height:160px; border:1px dashed var(--border-color); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.88rem;">${t("mtComputingHint")}</div>`;
+
+      const progWrap = document.getElementById("mtProgressWrap");
+      const progBar = document.getElementById("mtProgressBar");
+      const progText = document.getElementById("mtProgressText");
+      progWrap.style.display = "block";
+      progBar.style.width = "0%";
+      progText.textContent = `0 / ${p.cells}`;
+
+      try {
+        const worker = new Worker("./js/mystic-trials-worker-min.js");
+        mtState.worker = worker;
+
+        worker.onmessage = function (e) {
+          const msg = e.data;
+          if (msg.id !== currentRun) return;
+
+          if (msg.type === "progress") {
+            const pct = Math.round((msg.done / Math.max(1, msg.total)) * 100);
+            progBar.style.width = pct + "%";
+            progText.textContent = `${msg.done} / ${msg.total}`;
+          } else if (msg.type === "done") {
+            mtState.isRunning = false;
+            mtState.results = msg.results;
+            progWrap.style.display = "none";
+            runBtn.disabled = false;
+            runBtn.textContent = t("mtRunBtn");
+            renderMtResults();
+            worker.terminate();
+            mtState.worker = null;
+          } else if (msg.type === "error") {
+            mtState.isRunning = false;
+            progWrap.style.display = "none";
+            runBtn.disabled = false;
+            runBtn.textContent = t("mtRunBtn");
+            const errBox = document.getElementById("mtErrorBox");
+            errBox.textContent = msg.message;
+            errBox.style.display = "block";
+            worker.terminate();
+            mtState.worker = null;
+          }
+        };
+
+        worker.onerror = function () {
+          mtState.isRunning = false;
+          progWrap.style.display = "none";
+          runBtn.disabled = false;
+          runBtn.textContent = t("mtRunBtn");
+          const errBox = document.getElementById("mtErrorBox");
+          errBox.textContent = "Worker error: Please ensure js/mystic-trials-worker.js is hosted via HTTP/HTTPS.";
+          errBox.style.display = "block";
+        };
+
+        worker.postMessage({
+          id: currentRun,
+          player1: serializeMtPlayer(mtState.self),
+          player2: serializeMtPlayer(mtState.foe),
+          battles: p.battles,
+          step: p.step,
+          minInf: p.minInf,
+          maxInf: p.maxInf,
+          minCav: p.minCav,
+          maxCav: p.maxCav
+        });
+      } catch (err) {
+        mtState.isRunning = false;
+        runBtn.disabled = false;
+        runBtn.textContent = t("mtRunBtn");
+        const errBox = document.getElementById("mtErrorBox");
+        errBox.textContent = err.message;
+        errBox.style.display = "block";
+      }
+    }
+
+    function getWinRateColor(rate) {
+      const stops = [
+        { at: 0, rgb: [148, 163, 184] },
+        { at: 0.35, rgb: [251, 191, 36] },
+        { at: 0.7, rgb: [16, 185, 129] },
+        { at: 1, rgb: [5, 150, 105] }
+      ];
+      const clamped = Math.max(0, Math.min(1, rate));
+      for (let i = 1; i < stops.length; i++) {
+        if (clamped <= stops[i].at) {
+          const prev = stops[i - 1];
+          const curr = stops[i];
+          const ratio = (clamped - prev.at) / (curr.at - prev.at || 1);
+          const rgb = prev.rgb.map((c, idx) => Math.round(c + (curr.rgb[idx] - c) * ratio));
+          return `rgb(${rgb.join(", ")})`;
+        }
+      }
+      return "rgb(5, 150, 105)";
+    }
+
+    function inspectMtCell(infPct, cavPct) {
+      if (!mtState.results) return;
+      const found = mtState.results.find(r => Math.round(r.infantry * 100) === infPct && Math.round(r.cavalry * 100) === cavPct);
+      if (found) {
+        mtState.inspected = found;
+        const arcPct = Math.round(found.archery * 100);
+        const winPct = Math.round(found.winRate * 100);
+        document.getElementById("mtInspectedBadge").textContent = `${infPct} / ${cavPct} / ${arcPct} · ${winPct}%`;
+        renderMtHeatmap();
+      }
+    }
+
+    function renderMtHeatmap() {
+      const results = mtState.results;
+      if (!results || results.length === 0) return;
+
+      const best = results.reduce((a, b) => (b.winRate > a.winRate ? b : a), results[0]);
+      const bestInf = Math.round(best.infantry * 100);
+      const bestCav = Math.round(best.cavalry * 100);
+
+      const infCols = [...new Set(results.map(r => Math.round(r.infantry * 100)))].sort((a, b) => a - b);
+      const cavRows = [...new Set(results.map(r => Math.round(r.cavalry * 100)))].sort((a, b) => b - a);
+
+      const cellMap = new Map();
+      results.forEach(r => {
+        cellMap.set(`${Math.round(r.infantry * 100)}-${Math.round(r.cavalry * 100)}`, r);
+      });
+
+      const svgW = 16 * infCols.length + 48;
+      const svgH = 16 * cavRows.length + 28;
+
+      let cellsSvg = "";
+      cavRows.forEach((cav, rIdx) => {
+        infCols.forEach((inf, cIdx) => {
+          const item = cellMap.get(`${inf}-${cav}`);
+          if (!item) return;
+          const arc = Math.round(item.archery * 100);
+          const win = Math.round(item.winRate * 100);
+          const isBest = inf === bestInf && cav === bestCav;
+          const isInsp = mtState.inspected && Math.round(mtState.inspected.infantry * 100) === inf && Math.round(mtState.inspected.cavalry * 100) === cav;
+
+          const x = 48 + 16 * cIdx;
+          const y = 8 + 16 * rIdx;
+          const stroke = isInsp ? "#facc15" : isBest ? "#ffffff" : "transparent";
+          const strokeW = isBest ? 2 : isInsp ? 1.8 : 0;
+
+          cellsSvg += `
+            <g style="cursor:pointer;" onclick="inspectMtCell(${inf}, ${cav})">
+              <rect x="${x}" y="${y}" width="15" height="15" rx="2.5" fill="${getWinRateColor(item.winRate)}" stroke="${stroke}" stroke-width="${strokeW}">
+                <title>${inf}/${cav}/${arc} → ${win}%</title>
+              </rect>
+              ${isBest ? `<circle cx="${x + 7.5}" cy="${y + 7.5}" r="2.6" fill="#0f1115"/>` : ""}
+            </g>
+          `;
+        });
+      });
+
+      const xLabels = infCols.map((val, idx) => idx % 5 === 0
+        ? `<text x="${48 + 16 * idx + 7.5}" y="${16 * cavRows.length + 22}" text-anchor="middle" fill="#94a3b8" font-size="9">${val}</text>`
+        : "").join("");
+
+      const yLabels = cavRows.map((val, idx) => idx % 5 === 0
+        ? `<text x="40" y="${8 + 16 * idx + 11}" text-anchor="end" fill="#94a3b8" font-size="9">${val}</text>`
+        : "").join("");
+
+      document.getElementById("mtHeatmapContainer").innerHTML = `
+        <div style="overflow-x:auto;">
+          <svg viewBox="0 0 ${svgW} ${svgH}" style="width:100%; min-width:300px; height:auto; display:block;">
+            ${cellsSvg}
+            ${xLabels}
+            ${yLabels}
+          </svg>
+        </div>
+      `;
+      document.getElementById("mtHeatmapFooter").style.display = "block";
+    }
+
+    function renderMtResults() {
+      const results = mtState.results;
+      if (!results || results.length === 0) return;
+
+      const sorted = [...results].sort((a, b) => b.winRate - a.winRate);
+      const best = sorted[0];
+      const bInf = Math.round(best.infantry * 100);
+      const bCav = Math.round(best.cavalry * 100);
+      const bArc = Math.round(best.archery * 100);
+      const bWin = Math.round(best.winRate * 100);
+
+      const copyBtn = document.getElementById("mtCopyBtn");
+      copyBtn.style.display = "inline-block";
+      copyBtn.textContent = t("mtCopyBtn");
+
+      document.getElementById("mtBestContent").innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+          <div style="font-size:2.1rem; font-weight:900; letter-spacing:0.03em; color:#ffffff;">
+            ${bInf} <span style="color:#475569;">/</span> ${bCav} <span style="color:#475569;">/</span> ${bArc}
+          </div>
+          <div style="flex:1; min-width:140px; display:flex; align-items:center; gap:10px;">
+            <div class="bear-bar-track" style="height:10px; margin:0; flex:1;">
+              <div class="bear-bar-fill" style="width:${Math.max(4, bWin)}%; background:linear-gradient(90deg, #fbbf24, #10b981);"></div>
+            </div>
+            <span style="font-size:1.15rem; font-weight:800; color:#4ade80;">${bWin}%</span>
+          </div>
+        </div>
+      `;
+
+      renderMtHeatmap();
+
+      const top5 = sorted.slice(0, 5);
+      document.getElementById("mtTop5List").innerHTML = top5.map((item, idx) => {
+        const iPct = Math.round(item.infantry * 100);
+        const cPct = Math.round(item.cavalry * 100);
+        const aPct = Math.round(item.archery * 100);
+        const wPct = Math.round(item.winRate * 100);
+        return `
+          <div class="mt-top5-item">
+            <span style="width:20px; font-weight:700; color:var(--text-muted);">#${idx + 1}</span>
+            <span style="flex:1; font-weight:700;">${iPct} / ${cPct} / ${aPct}</span>
+            <div class="bear-bar-track" style="width:110px; height:7px; margin:0;">
+              <div class="bear-bar-fill" style="width:${Math.max(4, wPct)}%; background:#10b981;"></div>
+            </div>
+            <span style="width:46px; text-align:right; font-weight:700; color:#4ade80;">${wPct}%</span>
+          </div>
+        `;
+      }).join("");
+      document.getElementById("mtTop5Card").style.display = "block";
+    }
+
+    async function copyMtBest() {
+      if (!mtState.results || mtState.results.length === 0) return;
+      const best = mtState.results.reduce((a, b) => (b.winRate > a.winRate ? b : a), mtState.results[0]);
+      const text = `${Math.round(best.infantry * 100)} / ${Math.round(best.cavalry * 100)} / ${Math.round(best.archery * 100)} — ${Math.round(best.winRate * 100)}%`;
+      try {
+        await navigator.clipboard.writeText(text);
+        const btn = document.getElementById("mtCopyBtn");
+        btn.textContent = t("mtCopiedBtn");
+        setTimeout(() => { btn.textContent = t("mtCopyBtn"); }, 1800);
+      } catch (e) {}
+    }
+
+    function refreshMysticTrialsUI() {
+      renderMtArmyForm("self");
+      renderMtArmyForm("foe");
+      updateMtGridInfo();
+      if (mtState.results) {
+        renderMtResults();
+      } else {
+        document.getElementById("mtBestContent").innerHTML = `<p style="font-size:0.9rem; color:var(--text-muted); margin:0;">${t("mtIdleHint")}</p>`;
+        document.getElementById("mtHeatmapContainer").innerHTML = `<div style="height:160px; border:1px dashed var(--border-color); border-radius:10px; display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-size:0.88rem;">${t("mtNoResults")}</div>`;
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      refreshMysticTrialsUI();
+    });
   </script>
 
   <!-- External Bear Ratio Calculator Engine & Hero Dropdowns -->
