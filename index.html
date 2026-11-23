@@ -87,9 +87,16 @@
   <!-- TAB 2: Kingshot Alliance Batch Redeem -->
   <div id="tab-redeem" class="tab-content">
     <h1 data-i18n="redeemTitle">🎁 聯盟禮包碼批量兌換</h1>
-    <p class="page-subtitle" data-i18n="redeemSubtitle">即時同步聯盟成員名單（KID 1756 &bull; TWN）並顯示兌換進度</p>
+    <p id="redeemSubtitleEl" class="page-subtitle">即時同步聯盟成員名單（KID 1756 &bull; TWN）並顯示兌換進度</p>
 
     <div class="card">
+      <div class="form-group">
+        <label for="allianceTargetSelect" data-i18n="labelAllianceTarget">目標王國／聯盟：</label>
+        <select id="allianceTargetSelect" onchange="updateRedeemTargetLabel()">
+          <option value="1756|TWN" selected>1756 · TWN</option>
+          <option value="1706|HGT">1706 · HGT</option>
+        </select>
+      </div>
       <div class="form-group">
         <label for="giftCodeInput" data-i18n="labelGiftCode">禮包兌換碼：</label>
         <input type="text" id="giftCodeInput" data-i18n-placeholder="placeholderGiftCode" placeholder="輸入禮包碼（例如：KS1111）" autocomplete="off" onkeydown="if (event.key === 'Enter') startRedeem()" />
@@ -747,6 +754,9 @@
         yeonwoo: "妍羽",
         zoe: "佐伊",
         none: "None",
+
+        labelAllianceTarget: "目標王國／聯盟：",
+        redeemSubtitleDynamic: (kid, slug) => `即時同步聯盟成員名單（KID ${kid} • ${slug}）並顯示兌換進度`,
       },
       en: {
         pageTitle: "Kingshot Tools | Hot×Gie",
@@ -932,6 +942,9 @@
         yeonwoo: "Yeonwoo",
         zoe: "Zoe",
         none: "None",
+
+        labelAllianceTarget: "Target Kingdom / Alliance:",
+        redeemSubtitleDynamic: (kid, slug) => `Real-time member sync (KID ${kid} • ${slug}) & live redemption progress.`,
       }
     };
 
@@ -956,6 +969,8 @@
           el.textContent = t(key);
         }
       });
+
+      updateRedeemTargetLabel();
 
       document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
         const key = el.getAttribute("data-i18n-placeholder");
@@ -1123,8 +1138,26 @@
 
     let currentCode = "";
     let currentKid = "1756";
+    let currentAllianceSlug = "TWN";
     let memberList = [];
     let isBatchRunning = false;
+
+    function getSelectedRedeemTarget() {
+      const select = document.getElementById("allianceTargetSelect");
+      const raw = (select && select.value) || "1756|TWN";
+      const [kid, slug] = raw.split("|");
+      return {
+        kid: kid || "1756",
+        slug: slug || "TWN"
+      };
+    }
+
+    function updateRedeemTargetLabel() {
+      const subtitleEl = document.getElementById("redeemSubtitleEl");
+      if (!subtitleEl) return;
+      const { kid, slug } = getSelectedRedeemTarget();
+      subtitleEl.textContent = t("redeemSubtitleDynamic", kid, slug);
+    }
 
     function updateSummaryUI() {
       const total = memberList.length;
@@ -1290,7 +1323,10 @@
         return;
       }
 
+      const target = getSelectedRedeemTarget();
       currentCode = giftCode;
+      currentKid = target.kid;
+      currentAllianceSlug = target.slug;
       memberList = [];
       tbody.innerHTML = "";
       resultSection.style.display = "none";
@@ -1305,7 +1341,11 @@
         const listRes = await fetch(`${apiBaseUrl}/api/codeRedeem`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ action: "getMembers" })
+          body: JSON.stringify({
+            action: "getMembers",
+            kid: currentKid,
+            allianceSlug: currentAllianceSlug
+          })
         });
 
         const listData = await listRes.json();
@@ -1313,7 +1353,8 @@
           throw new Error(listData.error || "Failed to load member list");
         }
 
-        currentKid = listData.kid;
+        currentKid = listData.kid || currentKid;
+        currentAllianceSlug = listData.allianceSlug || currentAllianceSlug;
         memberList = listData.members.map(m => ({
           fid: m.fid,
           nick_name: m.nick_name,
